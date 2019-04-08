@@ -24,7 +24,7 @@ function SEO({ description, lang, meta, keywords, title }) {
     `
   )
 
-  const metaDescription = `Some description`
+  const metaDescription = `My personal blog, where I write stuff about technology`
 
   return (
     <Helmet
