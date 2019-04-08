@@ -38,7 +38,7 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working @ <a href={`https://www.segware.com.br/`}>Segware</a>.
+              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working @ <a href={`https://www.segware.com.br/`} target={`_blank`}>Segware</a>.
             </p>
           </div>
         )
