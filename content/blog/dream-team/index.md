@@ -1,0 +1,42 @@
+---
+title: "A dream team from a developer view [DRAFT]"
+date: "2019-04-10T02:23:07.571Z"
+---
+
+### Disclaimer
+
+Se você é um desenvolvedor como eu, poderíamos dizer que diariamente, vamos para nossos trabalhos, conversamos com nossos colegas e as vezes amigos, analisamos e desenvolvemos atividades e produtos, resolvemos bugs, rimos de piadas com tecnologias e frameworks, porém nem sempre nos sentimos em um ambiente de qualidade, ou trabalhando com tecnologias ou desafios interessantes que nos motivem a produzir sempre as melhores soluções. 
+
+Em frente à este cenário nem sempre fica exatamente claro quais são as características que melhorariam a qualidade de vida que temos em nosso trabalho, ou quais seriam os desafios que nos motivariam a construir um produto incrível. 
+
+Já se você é um CSO (*Chief Something Office*) construindo uma startup ou um líder de uma equipe de desenvolvimento consolidada pode ter se pego pensando em como formar uma equipe de alta performance, ou manter os membros da equipe motivados para entregar as melhores soluções.
+
+Bom, para ambos os casos este post propoe algumas ideias e metodologias que tornam desenvolvedores mais engajados e motivados a produzir soluções incríveis enquanto evoluem como profissionais e como pessoas.
+
+Estas ideias se baseiam em alguns anos pensando sobre isso, discutindo com outros desenvolvedores pouco ou muito motivados, conversando com techleads, com a comunidade de desenvolvimento e com diretores e donos de empresas.
+
+Para garantir que todos os aspectos de uma equipe sejam abordados, vou falar sobre a visão técnica e também a visão de gestão de pessoas. 
+
+### Comecando
+
+#### Visão Tecnica 
+
+- Se o departamento de tecnologia possui várias equipes, é necessário que cada uma dessas equipes respeitem as tecnologias escolhidas e tenham ciência dos porquês de tais tecnologias terem sido escolhidas. Por várias vezes, notei que quando essa interação de respeito não ocorre, as equipes passam a se sentirem melhores que as outras, requerendo mais recursos, ou até mesmo não vendo a importância do que é produzido pelas outras equipes. Uma solução interessante, é apresentar os processos que cada equipe segue, qual é o roadmap, a importância do que está sendo desenvolvido e por que isso é tão importante.
+- Uma tecnologia precisa ser escolhida sempre pensando em todos os membros do time, é importante que haja inovações nessa tecnologia, que justifiquem para o desenvolvedor desprender seu tempo para aprendê-las. a maioria dos desenvolvedores se empolga muito com novas tecnologias, ou até mesmo inovações em features de tecnologias antigas, mas é preciso que elas existam, ou a desmotivação pode ser acarretada.
+- A equipe de desenvolvimento e os desenvolvedores precisam ter autonomia para fazer as escolhas das tecnologias que serão utilizadas dentro dos projetos, essa falta de autonomia acarreta também a desmotivação, ou mesmo a falta de desempenho no processo de desenvolvimento. Contudo, para evitar muitas tecnologias serem testadas e abandonadas dentro do projeto, é preciso elencar junto da equipe quais seriam as melhores apostas a se fazer, e continuar com elas a longo prazo.
+- Pair programming entre os membros do time os nivela melhor e descentraliza o conhecimento, code reviews sem preciosismo e egocetrismo, seguindo uma coding styleguide definido por todos os membros também facilita o entendimento de todos os devs, ele também é importante para integrar os membros, permitir que ocorra também um desenvolvimento emocional dos desenvolvedores dentro da equipe. Nas minhas experiências fazendo isso, foi muito importante para que eu aprendesse a dizer que não sabia de algo, e reforçar a confiança entre os membros da equipe.
+- Promover Dojos ou hackathons para solucionar problemas enfrentados por toda a equipe,  pense junto com a equipe o que seria interessante de ser implementado e que anima todos. Essa é uma iniciativa que motiva muito os desenvolvedores, todos gostamos de criar coisas novas, que solucionam problemas, ou as vezes até criam outros, mas a recompensa de criar algo novo, e estar integrado junto dos seus colegas de trabalho, com certeza é muito importante
+- Promover contribuição para a comunidade open source é uma estratégia muito interessante para fazer seu time se sentir parte de algo maior, saber que o seu esforço para resolver um problema de outros devs está sendo utilizado ou notado em uma equipe ou entre a comunidade pode fazer toda a diferença. Existem diversos movimentos pela web que permitem isso, o Frontend Brasil é um grupo famoso por promover essas iniciativas em que desenvolvedores de todo o país interagem e participam
+- Participe ou permita que sua equipe participe de eventos de tecnologia, e incentive-os a ir buscando mais do que apenas novas tecnologias mas também conhecer pessoas. Atualmente trabalho em uma empresa que conheci por conta de pessoas em eventos da comunidade, isso permitiu que eu conhecesse a empresa e também os profissionais que trabalhavam nela.
+
+#### Visao de Pessoas
+
+- As equipes precisam se complementar, não adianta possuir uma equipe de 5 pessoas com 4 devs que são extremamente experientes e tem perfil para ser lideres, as discussões vão ser infindáveis, e acabará ocorrendo muita discordia entre os membros do grupo, procure encontrar desenvolvedores/lideres que se enquadram com o perfil da empresa e também da equipe, isso facilitará muito a integração entre eles, e consequentemente, aumentará a qualidade do produto e a boa experiência de trabalho .
+- Todo o desenvolvedor precisa entender o propósito dos produtos que estão sendo desenvolvidos, mesmo que existam produtos que tenham falhado em algum momento, se algum desenvolvedor não compreende a ideia do produto e o impacto que ele causa, este mesmo desenvolvedor poderá se tornar uma contra-corrente que afetará a equipe, o ownership e obviamente a qualidade do produto
+- É preciso ter um tech lead que insipire as pessoas. Tech leads costumam ser conhecidos como seniors muito experientes, esse é um ponto importante para garantir que os membros do time se sintam inspirados a aprender e superar os desafios do dia a dia
+- Tenha 1:1 com frequência regrada e fixa, uma 1:1 consiste basicamente em uma rodada de update e feedback entre um tech lead/gestor e um membro do time, a ideia é que em poucos minutos (15 em geral) seja possível tratar das frustrações e exitos que o desenvolvedor passou naquele periodo avaliado, isso é muito importante pois dá voz ao desenvolvedor para que ele possa reclamar, parabenizar e/ou sugerir mudanças que tornem o dia-a-dia, processo, metodologia ou qualquer outra coisa associada ao ambiente de trabalho, melhor. Isso claro é uma via de mão dupla e serve também para o techlead que está guiando a 1:1 possa dar insights produtivos e construtivos sobre o desenvolvimento do dev.
+- Estabelecer sprint reviews e plannings é muito importante, somos seres humanos e como tais costumamos postergar atividades que não tenham horarios definidos, para uma equipe que não esta completamente alinhada entre cultura, metodologia e velocidade de desenvolvimento, essa é uma estratégia muito boa de se usar, não necessariamente pensando em sprints ou se prendendo a metodologias, mas em timeboxes. levar em consideração as capacidades da equipe é um ponto importante também, você não deve pressionar exageradamente todos os membros, mas criar um ambiente onde tenha certa pressão pode estimular a evolução dos membros e consequentemente do produto.
+- Estabelecer pequenas recompensas e reconhecimentos é uma estratégia para manter o seu time focado e motivado, não é necessário ocorrer uma periodicidade, mas sempre que existir um sucesso seja em uma sprint concluída ou uma release lançada, recompense a equipe pelo esforço bem sucedido. Isso mostra que a equipe teve êxito naquela atividade.
+- Quando um processo falha, ou um bug vai pra produção é importante que não ocorram acusações individuais, e sim que a equipe se comprometa em entender o problema, corrigí-lo e avaliar o processo que levou ao acontecimento deste. É necessário sempre estabelecer a importância de garantir a entrega de valor para o cliente, e não apenas concluir a feature.
+
+Espero que esse conteúdo desperte seu interesse na evolução da equipe em que você trabalha ou lidera, e por favor, comente sobre o que você acredita ser uma boa equipe para trabalhar e compartilhe com seus colegas e amigos.
