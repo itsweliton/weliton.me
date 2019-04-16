@@ -3,6 +3,9 @@ title: "A dream team from a developer view [DRAFT 0.1]"
 date: "2019-04-16T17:01:52.743Z"
 ---
 
+![alt text](https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80 "Time de desenvolvimento")
+Time de desenvolvimento [Unsplash](https://unsplash.com/photos/QckxruozjRg)
+
 ### Disclaimer
 
 Se você é um desenvolvedor como eu, poderíamos dizer que diariamente, vamos para nossos trabalhos, conversamos com nossos colegas e amigos, analisamos e desenvolvemos atividades e produtos, resolvemos bugs, rimos de piadas com tecnologias e frameworks, porém nem sempre nos sentimos em um ambiente de qualidade, ou trabalhando com tecnologias e desafios interessantes que nos motivem a produzir sempre as melhores soluções. 
@@ -61,8 +64,8 @@ Visao de Pessoas
 
 Agradecimentos 
 
-Bom, estes são os pontos que acabei levantando, se você discorda de algum, ou concorda e apoia muito, não deixa de comentar sobre, no meu [twitter]([https://twitter.com/welitondresende](https://twitter.com/welitondresende)) (ainda não inseri uma sessão de comentários aqui, esse é o MVP do blog) ou me enviar um [email]([mailto:welitonderesende@icloud.com](mailto:name@email.com)), se você encontrou um erro no texto e gostaria de corrigir abre uma PR no [repo do site]([https://github.com/welitonderesende/weliton.me](https://github.com/welitonderesende/weliton.me)) com certeza eu vou olhar e aceitar :).
+Bom, estes são os pontos que acabei levantando, se você discorda de algum, ou concorda e apoia muito, não deixa de comentar sobre, no meu [twitter](https://twitter.com/welitondresende) (ainda não inseri uma sessão de comentários aqui, esse é o MVP do blog) ou me enviar um [email](mailto:name@email.com), se você encontrou um erro no texto e gostaria de corrigir abre uma PR no [repo do site](https://github.com/welitonderesende/weliton.me) com certeza eu vou olhar e aceitar :).
 
-Quero agradecer à comunidade do [FloripaJS]([http://floripajs.org/](http://floripajs.org/)) que ajudou muito, levantando, discutindo e comentando sobre os pontos desse artigo no último meetup.
+Quero agradecer à comunidade do [FloripaJS](http://floripajs.org/) que ajudou muito, levantando, discutindo e comentando sobre os pontos desse artigo no último meetup.
 
 Valeu pessoal!
