@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `A regular dev`,
+    title: `Weliton.me`,
     author: `Weliton de Resende`,
     description: `empty`,
     siteUrl: `https://weliton.me`,
@@ -32,6 +32,13 @@ module.exports = {
             options: {
               maxWidth: 590,
             },
+          },
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+              rel: "nofollow"
+            }
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,

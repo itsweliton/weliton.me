@@ -64,7 +64,7 @@ Visao de Pessoas
 
 Agradecimentos 
 
-Bom, estes são os pontos que acabei levantando, se você discorda de algum, ou concorda e apoia muito, não deixa de comentar sobre, no meu [twitter](https://twitter.com/welitondresende) (ainda não inseri uma sessão de comentários aqui, esse é o MVP do blog) ou me enviar um [email](mailto:name@email.com), se você encontrou um erro no texto e gostaria de corrigir abre uma PR no [repo do site](https://github.com/welitonderesende/weliton.me) com certeza eu vou olhar e aceitar :).
+Bom, estes são os pontos que acabei levantando, se você discorda de algum, ou concorda e apoia muito, não deixa de comentar sobre, no meu [twitter](https://twitter.com/welitondresende) (ainda não inseri uma sessão de comentários aqui, esse é o MVP do blog) ou me enviar um [email](mailto:welitonderesende@icloud.com), se você encontrou um erro no texto e gostaria de corrigir abre uma PR no [repo do site](https://github.com/welitonderesende/weliton.me) com certeza eu vou olhar e aceitar :).
 
 Quero agradecer à comunidade do [FloripaJS](http://floripajs.org/) que ajudou muito, levantando, discutindo e comentando sobre os pontos desse artigo no último meetup.
 
