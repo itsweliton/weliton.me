@@ -20,7 +20,9 @@ Estas ideias se baseiam em alguns anos pensando sobre isso, discutindo com outro
 
 Para garantir que todos os aspectos de uma equipe sejam abordados, vou falar sobre a visão técnica e também a visão de gestão de pessoas. 
 
-Visão Tecnica 
+
+
+### Visão Tecnica 
 
 - Se o departamento de tecnologia possui várias equipes, é necessário que cada uma dessas equipes respeitem as tecnologias escolhidas e tenham ciência dos porquês de tais tecnologias terem sido escolhidas. Por várias vezes, notei que quando essa interação de respeito não ocorre, as equipes passam a se sentirem melhores que as outras, requerendo mais recursos, ou até mesmo não vendo a importância do que é produzido pelas outras. Uma solução interessante, é apresentar os processos que cada equipe segue, qual é o roadmap, a importância do que está sendo desenvolvido e por que isso é tão relevante para a empresa.
 - A equipe de desenvolvimento e os desenvolvedores precisam ter autonomia para fazer as escolhas das tecnologias que serão utilizadas dentro dos projetos, essa falta de autonomia acarreta também a desmotivação, ou mesmo a falta de desempenho no processo de desenvolvimento.
@@ -35,7 +37,9 @@ Visão Tecnica
 - Promova Dojos e hackathons para solucionar problemas enfrentados por toda a equipe, pense junto com a equipe o que seria interessante de ser implementado e que anima todos. Essa é uma iniciativa que motiva muito os desenvolvedores, todos gostamos de criar coisas novas, ou solucionar problemas existentes. A recompensa de criar algo novo, e estar integrado junto dos seus colegas de trabalho, com certeza é muito importante para a evolução do time
 - Participe ou permita que sua equipe participe de eventos de tecnologia, e incentive-os a ir buscando mais do que apenas novas tecnologias mas também conhecer pessoas. Atualmente trabalho em uma empresa que conheci por conta de pessoas em eventos da comunidade, isso permitiu que eu conhecesse a empresa e também os profissionais que trabalhavam nela.
 
-Visao de Pessoas
+
+
+### Visao de Pessoas
 
 - Se você é um líder contratando um novo membro para equipe ou mesmo montando uma, busque avaliar o perfil do candidato, é essencial que ele se encaixe com o time que você tem não apenas pelo conhecimento tecnológico, mas também pelo perfil comportamental.
 
