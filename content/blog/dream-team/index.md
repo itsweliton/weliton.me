@@ -1,5 +1,5 @@
 ---
-title: "A dream team from a developer view [DRAFT 0.1]"
+title: "O melhor time do ponto de vista de um desenvolvedor"
 date: "2019-04-16T17:01:52.743Z"
 ---
 
