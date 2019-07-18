@@ -38,8 +38,7 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working @ <a href={`https://www.segware.com.br/`} target={`_blank`}>Segware.</a>
-               Feel free to contribute to this blog on <a href={`https://github.com/welitonderesende/weliton.me`} target={`_blank`}>my Github account</a>.
+              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working Fulltime as Frontend Engineer, <a href={`https://www.meetup.com/vuefloripa/`} target={`_blank`}>Vue Floripa</a> organizer . Feel free to contribute to this blog on <a href={`https://github.com/welitonderesende/weliton.me`} target={`_blank`}>my Github account</a>.
             </p>
           </div>
         )
