@@ -38,7 +38,7 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working Fulltime as Frontend Engineer, <a href={`https://www.meetup.com/vuefloripa/`} target={`_blank`}>Vue Floripa</a> organizer . Feel free to contribute to this blog on <a href={`https://github.com/welitonderesende/weliton.me`} target={`_blank`}>my Github account</a>.
+              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working Fulltime as Frontend Engineer, <a href={`https://www.meetup.com/vuefloripa/`} target={`_blank`}>Vue Floripa</a> and <a href={`https://www.meetup.com/ReactJS-Floripa/`} target={`_blank`}>ReactJS Floripa</a> organizer . Feel free to contribute to this blog on <a href={`https://github.com/welitonderesende/weliton.me`} target={`_blank`}>my Github account</a>.
             </p>
           </div>
         )
