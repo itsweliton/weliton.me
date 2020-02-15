@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import { Link, graphql } from "gatsby"
+import SEO from "../components/seo";
 import styled from 'styled-components';
 import wellSvg, { ReactComponent as WellSvg } from './../utils/wr_src.svg';
 
@@ -54,6 +55,10 @@ class BaseContent extends Component {
 
     return (
       <MainPage>
+        <SEO
+          title="Welcome"
+          keywords={[`blog`, `gatsby`, `javascript`, `react`]}
+        />
         <WellSvgStyled />
         <NameStyled>Weliton de Resende</NameStyled>
       </MainPage>
