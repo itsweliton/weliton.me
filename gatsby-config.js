@@ -5,7 +5,7 @@ module.exports = {
     description: `empty`,
     siteUrl: `https://weliton.me`,
     social: {
-      twitter: `welitonderesende`,
+      twitter: `welitondresende`,
     },
   },
   plugins: [
@@ -79,6 +79,19 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-svgr',
+      options: {
+        prettier: true,          // use prettier to format JS code output (default)
+        svgo: true,              // use svgo to optimize SVGs (default)
+        svgoConfig: {
+          plugins: {
+            removeViewBox: true, // remove viewBox when possible (default)
+            cleanupIDs: true,    // remove unused IDs and minify remaining IDs (default)
+          },
+        },
       },
     },
   ],
