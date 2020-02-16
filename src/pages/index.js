@@ -27,8 +27,6 @@ const MainContent = styled.div`
 `;
 
 const WellSvgStyled = styled(WellSvg)`
-  animation: flicker 3s linear infinite;
-  filter: drop-shadow(1px 1px 3px #4D47AF);
   width: 50vw;
   max-width: 990px;
   margin: 0 auto;
@@ -88,8 +86,9 @@ const MenuStyled = styled.div`
 
 const LinkStyled = styled.a`
   animation: scale-down-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-  font-family: Lato;
+  font-family: lato, sans-serif;
   font-weight: 500;
+  font-style: normal;
   letter-spacing: 1px;
   font-size: 16px;
   text-decoration: none;
@@ -110,8 +109,9 @@ const LinkStyled = styled.a`
 
 const LinkCustom = styled(Link)`
   animation: scale-down-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-  font-family: Lato;
+  font-family: lato, sans-serif;
   font-weight: 500;
+  font-style: normal;
   letter-spacing: 1px;
   font-size: 16px;
   text-decoration: none;
