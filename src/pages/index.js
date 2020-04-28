@@ -2,14 +2,12 @@ import React, {Component} from "react"
 import { Link, graphql } from "gatsby"
 import SEO from "../components/seo";
 import styled from 'styled-components';
-import wellSvg, { ReactComponent as WellSvg } from './../utils/wr_src.svg';
-import anime from '../utils/anime.css';
+import { ReactComponent as WellSvg } from './../utils/wr_src.svg';
 
 const MainPage = styled.div`
   @import url("https://use.typekit.net/nya0voz.css");
   overflow: hidden;
   font-family: 'DM Serif Text', serif;
-  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,12 +16,15 @@ const MainPage = styled.div`
 `;
 
 const MainContent = styled.div`
-  width: 100vw;
-  height: calc(100vh - 35px);
+  width: 100%;
+  height: calc(100vh - 300px);
   background-color: #04003B;
   display: flex;
-  align-items: center;
   text-align: center;
+  @media (min-width: 768px) {
+    align-items: center;
+    height: calc(100vh - 35px);
+  }
 `;
 
 const WellSvgStyled = styled(WellSvg)`
@@ -43,7 +44,7 @@ const WellSvgStyled = styled(WellSvg)`
 
 const ContainerNameStyled = styled.div`
   position: absolute;
-  width: 100vw;
+  width: 100%;
   align-self: center;
   padding: 0 40px;
   line-height: 1;
