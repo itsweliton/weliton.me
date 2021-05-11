@@ -1,3 +1,71 @@
-html {
-    overflow: auto;
+/* global.css */
+
+body {
+  --bg: #e9e0dc;
+  --textNormal: #222;
+  --textTitle: #222;
+  --textLink: blue;
+  --hr: hsla(0, 0%, 0%, 0.2);
+
+  background-color: var(--bg);
+  transition: color 0.2s ease-out, background 0.2s ease-out;
 }
+  
+body.dark {
+  -webkit-font-smoothing: antialiased;
+
+  --bg: #161930;
+  --textNormal: rgba(255, 255, 255, 0.88);
+  --textTitle: white;
+  --textLink: yellow;
+  --hr: hsla(0, 0%, 100%, 0.2);
+}
+#toggle-wrapper {
+  height: 100px;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+#togg-label {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 28px;
+  border-radius: 100px;
+  background-color: #000839;
+  overflow: hidden;
+  cursor: pointer;
+}
+#togg-label:before,
+#togg-label:after {
+    display: block;
+    position: absolute;
+    content: "";		
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    transition: .5s ease;
+  }
+#togg-label:before {
+    background-color: #ffa41b;
+}
+
+#togg-label:after {
+    background-color: #000839;
+    left: -44px;
+    transform: scale(0.00001);
+}
+
+#toggle[type="checkbox"] {
+  display: none;
+}
+#toggle:checked + label:before {
+  background-color: #FFF;
+  transform: translateX(20px);
+}
+ 
+#toggle:checked + label:after {
+  transform: translateX(60px) scale(1);
+} 

@@ -1,14 +1,14 @@
 import React from "react"
 import { Link } from "gatsby"
-import '../../static/index.css'
+import "../../static/index.css"
 import { rhythm, scale } from "../utils/typography"
+import ThemeToggl from "./ThemeToggler"
 
 class Layout extends React.Component {
   render() {
     const { location, title, children } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
     let header
-
     if (location.pathname === rootPath) {
       header = (
         <h1
@@ -16,6 +16,8 @@ class Layout extends React.Component {
             ...scale(1.5),
             marginBottom: rhythm(1.5),
             marginTop: 0,
+            color: "var(--textNormal)",
+            // transition: 'color 0.2s ease-out, background 0.2s ease-out',
           }}
         >
           <Link
@@ -36,6 +38,7 @@ class Layout extends React.Component {
           style={{
             fontFamily: `Montserrat, sans-serif`,
             marginTop: 0,
+            color: "var(--textNormal)",
           }}
         >
           <Link
@@ -60,12 +63,17 @@ class Layout extends React.Component {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
-        <header>{header}</header>
+        <header>
+          <ThemeToggl />
+          {header}
+        </header>
         <main>{children}</main>
-        <footer>
+        <footer style={{ color: "var(--textNormal)" }}>
           © {new Date().getFullYear()}, Built with
           {` `}
-          <a href="https://www.gatsbyjs.org" target={`_blank`}>Gatsby</a>
+          <a href="https://www.gatsbyjs.org" target={`_blank`}>
+            Gatsby
+          </a>
         </footer>
       </div>
     )

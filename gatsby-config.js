@@ -67,8 +67,6 @@ module.exports = {
         name: `Weliton's Blog`,
         short_name: `Weliton de Resende`,
         start_url: `/`,
-        background_color: `#04003B`,
-        theme_color: `#04003B`,
         display: `minimal-ui`,
         icon: `content/assets/wr_favicon.png`,
       },
@@ -81,6 +79,7 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    `gatsby-plugin-dark-mode`,
     {
       resolve: 'gatsby-plugin-svgr',
       options: {
