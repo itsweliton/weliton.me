@@ -17,7 +17,7 @@ class BlogPostTemplate extends React.Component {
       >
         <Layout location={this.props.location} title={siteTitle}>
           <SEO title={post.frontmatter.title} description={`nothing`} />
-          <h1 style={{ color: "var(--textNormal)" }}>
+          <h1>
             {post.frontmatter.title}
           </h1>
           <p

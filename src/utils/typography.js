@@ -1,17 +1,42 @@
 import Typography from "typography"
-import Wordpress2016 from "typography-theme-wordpress-2016"
+import BlogIndex from "../pages"
 
-Wordpress2016.overrideThemeStyles = () => {
-  return {
-    "a.gatsby-resp-image-link": {
-      boxShadow: `none`,
+const typography = new Typography({
+  baseFontSize: "18px",
+  baseLineHeight: 1.666,
+  bodyFontFamily: ["Open Sans", "serif"],
+  headerFontFamily: [
+    "DM Serif Text",
+    "Helvetica",
+    "Arial",
+    "sans-serif",
+  ],
+  overrideStyles: ({ scale, rhythm }) => ({
+    a: {
+      textDecoration: "none",
     },
-  }
-}
-
-delete Wordpress2016.googleFonts
-
-const typography = new Typography(Wordpress2016)
+    "body.dark a": {
+      color: "#5BECC0",
+    },
+    "body.dark a:not(.titleLink)": {
+      color: "#e96ef4"
+    },
+    "body.light a:not(.titleLink)": {
+      fontStyle: "italic",
+      color: "#7b6af2",
+      fontWeight: "500",
+    },
+    "body.light h1": {
+      color: "#551a8b",
+    },
+    "body.dark h1": {
+      color: "#5BECC0",
+    },
+    h3: {
+      letterSpacing: "1.2px"
+    }
+  }),
+})
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {

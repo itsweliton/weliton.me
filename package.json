@@ -36,8 +36,8 @@
     "react-typography": "^0.16.19",
     "sharp": "^0.22.0",
     "styled-components": "^5.0.1",
-    "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.54",
+    "typeface-dm-serif-text": "^1.1.13",
+    "typeface-open-sans": "^1.1.13",
     "typography": "^0.16.19",
     "typography-theme-wordpress-2016": "^0.16.19"
   },
