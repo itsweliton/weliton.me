@@ -52,7 +52,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           property: `og:image`,
-          content: `/content/assets/wr_favicon.jpg`
+          content: `${__dirname}/content/assets/wr_favicon.jpg`
         },
         {
           name: `twitter:card`,
@@ -72,7 +72,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           name: `twitter:image`,
-          content: `/content/assets/wr_favicon.jpg`
+          content: `${__dirname}/content/assets/wr_favicon.jpg`
         }
       ]
         .concat(
