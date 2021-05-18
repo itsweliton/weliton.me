@@ -68,7 +68,7 @@ module.exports = {
         short_name: `Weliton de Resende`,
         start_url: `/`,
         display: `minimal-ui`,
-        icon: `content/assets/wr_favicon.png`,
+        icon: `content/assets/wr_favicon.jpg`,
       },
     },
     `gatsby-plugin-offline`,
