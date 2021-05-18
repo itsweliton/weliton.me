@@ -51,6 +51,10 @@ function SEO({ description, lang, meta, keywords, title }) {
           content: `website`,
         },
         {
+          property: `og:image`,
+          content: `content/assets/wr_favicon.jpg`
+        },
+        {
           name: `twitter:card`,
           content: `summary`,
         },
@@ -66,6 +70,10 @@ function SEO({ description, lang, meta, keywords, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: `twitter:image`,
+          content: `content/assets/wr_favicon.jpg`
+        }
       ]
         .concat(
           keywords.length > 0
