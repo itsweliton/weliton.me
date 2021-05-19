@@ -6,7 +6,7 @@ module.exports = {
     siteUrl: `https://weliton.me`,
     social: {
       twitter: `welitondresende`,
-      image: `https://weliton.me/icons/icon-384x384.png`,
+      image: `https://weliton.me/icons/icon-256x256.png`,
     },
   },
   plugins: [
