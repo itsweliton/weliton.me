@@ -18,6 +18,9 @@ function SEO({ description, lang, meta, keywords, title }) {
           siteMetadata {
             title
             author
+            social {
+              image
+            }
           }
         }
       }
@@ -52,7 +55,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           property: `og:image`,
-          content: `${__dirname}/content/assets/wr_favicon.jpg`
+          content: site.siteMetadata.social.image
         },
         {
           name: `twitter:card`,
@@ -72,7 +75,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           name: `twitter:image`,
-          content: `${__dirname}/content/assets/wr_favicon.jpg`
+          content: site.siteMetadata.social.image
         }
       ]
         .concat(
