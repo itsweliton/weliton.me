@@ -7,7 +7,7 @@ As Developer sometimes we face the well known issue of being blocked, not knowin
 
 If you're a junior developer, who's just starting in the tech world, this can be even more frustrating, and it's totally comprehensible, you're learning new tech, everything is so amazing and you want to build neat stuff, but getting stuck makes you feel powerless or incapable of solving things, sometimes this can even lead to a frustration path of thinking you're not good enough.
 
-At Those moments you must understand that in the tech world, problems happen (I would even go further and say problems happen everywhere 🤷🏼‍♂️) and that's totally ok, it doesn't matter if you're working alone or with a team, this is natural.
+At those moments you must understand that in the tech world, problems happen (I would even go further and say problems happen everywhere 🤷🏼‍♂️) and that's totally ok, it doesn't matter if you're working alone or with a team, this is natural.
 
 Ok, I guess you get it by now, shit happens, but how can we handle problems when working as developers? 
 
