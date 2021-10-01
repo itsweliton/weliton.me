@@ -38,7 +38,14 @@ function Bio() {
               }}
             />
             <p style={{color: 'var(--textNormal)'}}>
-              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working Fulltime as Lead Frontend Developer at <a href={`https://micromed.ind.br`} target={`_blank`}>Micromed</a>.<br></br> <a href={`https://www.meetup.com/vuefloripa/`} target={`_blank`}>Vue Floripa</a> and <a href={`https://www.meetup.com/ReactJS-Floripa/`} target={`_blank`}>ReactJS Floripa</a> organizer . Feel free to contribute to this blog on <a href={`https://github.com/welitonderesende/weliton.me`} target={`_blank`}>my Github account</a>.
+              Written by <strong>{author}</strong> who lives in Florianópolis Brazil working Fulltime as Software Engineer at 
+              <a href={`https://soraschools.com/`} target={`_blank`}>Sora Schools</a>.<br></br> 
+              <a href={`https://www.meetup.com/vuefloripa/`} target={`_blank`}>Vue Floripa</a> and 
+              <a href={`https://www.meetup.com/ReactJS-Floripa/`} target={`_blank`}>ReactJS Floripa</a> 
+              organizer . Feel free to contribute to this blog on 
+              <a href={`https://github.com/welitonderesende/weliton.me`} target={`_blank`}>
+                my Github account
+              </a>.
             </p>
           </div>
         )
