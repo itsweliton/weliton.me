@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import Sidebar from "./Sidebar";
+import Sidebar from "../components/Sidebar";
+import "../styles/layout.scss";
 
 type LayoutProps = {
   children: ReactNode;
@@ -18,10 +19,11 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
     }
   `);
   return (
-    <div>
-      <header>{data.site.siteMetadata.title}</header>
-      <Sidebar />
-      <main>
+    <div className="layout">
+      <aside className="sidebar">
+        <Sidebar />
+      </aside>
+      <main className="main-content">
         <h1>{pageTitle}</h1>
         {children}
       </main>

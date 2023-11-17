@@ -1,9 +1,9 @@
 import * as React from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../layouts/Layout";
 import Seo from "../../components/Seo";
 import { Link, graphql } from "gatsby";
 
-const BlogPage = ({ data }) => {
+const Posts = ({ data }) => {
   return (
     <Layout pageTitle="My Blog Posts">
       <p>My cool posts will go in here</p>
@@ -39,4 +39,4 @@ export const query = graphql`
 
 export const Head = () => <Seo title="My Blog Posts" />;
 
-export default BlogPage;
+export default Posts;

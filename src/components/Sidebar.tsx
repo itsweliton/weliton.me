@@ -1,9 +1,10 @@
 import { Link } from "gatsby";
 import React from "react";
+import "../styles/sidebar.scss";
 
 const Sidebar: React.FC = () => {
   return (
-    <nav>
+    <nav className="sidebar">
       <ul>
         <li>
           <Link to="/">Home</Link>

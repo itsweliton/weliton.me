@@ -38,6 +38,80 @@ const config: GatsbyConfig = {
       },
       __key: "posts",
     },
+    {
+      resolve: `gatsby-plugin-webfonts`,
+      options: {
+        fonts: {
+          google: [
+            // You can also load fonts from Google Fonts if needed
+          ],
+          custom: [
+            {
+              family: "Inter Regular",
+              urls: ["/fonts/Inter-Regular.ttf"],
+            },
+            {
+              family: "Inter Medium",
+              urls: ["/fonts/Inter-Medium.ttf"],
+            },
+            {
+              family: "Inter Extra Light",
+              urls: ["/fonts/Inter-ExtraLight.ttf"],
+            },
+            {
+              family: "Inter Thin",
+              urls: ["/fonts/Inter-Thin.ttf"],
+            },
+            {
+              family: "Newsreader Extra Light",
+              urls: ["/fonts/Newsreader_60pt-ExtraLight.ttf"],
+            },
+            {
+              family: "Newsreader Extra Light Italic",
+              urls: ["/fonts/Newsreader_60pt-ExtraLightItalic.ttf"],
+            },
+            {
+              family: "Newsreader Light",
+              urls: ["/fonts/Newsreader_60pt-Light.ttf"],
+            },
+            {
+              family: "Newsreader Light Italic",
+              urls: ["/fonts/Newsreader_60pt-LightItalic.ttf"],
+            },
+            {
+              family: "Newsreader Italic",
+              urls: ["/fonts/Newsreader_60pt-Italic.ttf"],
+            },
+            {
+              family: "Newsreader Regular",
+              urls: ["/fonts/Newsreader_60pt-Regular.ttf"],
+            },
+            {
+              family: "Newsreader Medium",
+              urls: ["/fonts/Newsreader_60pt-Medium.ttf"],
+            },
+            {
+              family: "Newsreader Medium Italic",
+              urls: ["/fonts/Newsreader_60pt-MediumItalic.ttf"],
+            },
+            {
+              family: "Newsreader Semi Bold",
+              urls: ["/fonts/Newsreader_60pt-SemiBold.ttf"],
+            },
+            {
+              family: "Newsreader Semi Bold Italic",
+              urls: ["/fonts/Newsreader_60pt-SemiBoldItalic.ttf"],
+            },
+          ],
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/Layout.tsx`),
+      },
+    },
   ],
 };
 
