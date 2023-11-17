@@ -1,15 +1,8 @@
-// .sidebar {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 250px;
-//   height: 100vh;
-//   background-color: #b71f1f;
-//   z-index: 999;
-// }
+.sidebar {
+}
 
-// @media (max-width: 767px) {
-//   .sidebar {
-//     display: none;
-//   }
-// }
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+}
