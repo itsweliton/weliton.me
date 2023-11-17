@@ -4,25 +4,19 @@ import Sidebar from "../components/Sidebar";
 import "../styles/layout.scss";
 import PostsListing from "../components/PostsListing";
 
-type LayoutProps = {
+type PostsLayoutProps = {
   children: ReactNode;
-  pageTitle?: string;
+  pageTitle: string;
 };
 
-const Layout = ({ children, pageTitle }: LayoutProps) => {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
+const PostsLayout = ({ children, pageTitle }: PostsLayoutProps) => {
   return (
     <div className="layout">
       <aside className="sidebar">
         <Sidebar />
+      </aside>
+      <aside>
+        <PostsListing />
       </aside>
       <main className="main-content">
         <h1>{pageTitle}</h1>
@@ -32,4 +26,4 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
   );
 };
 
-export default Layout;
+export default PostsLayout;

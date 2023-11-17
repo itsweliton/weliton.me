@@ -1,15 +1,14 @@
 import * as React from "react";
-import Posts from "./index";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Layout from "../../layouts/Layout";
+import PostsLayout from "../../layouts/PostsLayout";
 
 const BlogPost = ({ data, children }) => {
   const image = getImage(data.mdx.frontmatter.hero_image);
 
   return (
-    <Layout pageTitle={data.mdx.frontmatter.title}>
+    <PostsLayout pageTitle={data.mdx.frontmatter.title}>
       <p>{data.mdx.frontmatter.date}</p>
       <div>
         {image && (
@@ -20,7 +19,7 @@ const BlogPost = ({ data, children }) => {
         )}
       </div>
       {children}
-    </Layout>
+    </PostsLayout>
   );
 };
 

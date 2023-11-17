@@ -3,6 +3,7 @@
 .layout {
   display: grid;
   grid-template-columns: auto 1fr;
+  grid-auto-flow: column;
   gap: 20px;
   min-height: 100vh;
 

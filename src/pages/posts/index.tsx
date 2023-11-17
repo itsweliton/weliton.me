@@ -1,42 +1,15 @@
 import * as React from "react";
 import Layout from "../../layouts/Layout";
 import Seo from "../../components/Seo";
-import { Link, graphql } from "gatsby";
+import PostsListing from "../../components/PostsListing";
 
-const Posts = ({ data }) => {
+const Posts = () => {
   return (
-    <Layout pageTitle="My Blog Posts">
-      <p>My cool posts will go in here</p>
-      <ul>
-        {data.allMdx.nodes.map((node) => (
-          <article key={node.id}>
-            <Link to={node.frontmatter.slug}>
-              <h2>{node.frontmatter.title}</h2>
-            </Link>
-            <p>Posted: {node.frontmatter.date}</p>
-          </article>
-        ))}
-      </ul>
+    <Layout>
+      <PostsListing />
     </Layout>
   );
 };
-
-export const query = graphql`
-  query {
-    allMdx(sort: { frontmatter: { date: DESC }}) {
-      nodes {
-        frontmatter {
-          date(formatString: "MMMM D, YYYY")
-          title
-          slug
-        }
-        id
-        excerpt
-      }
-    }
-  }
-`;
-
 export const Head = () => <Seo title="My Blog Posts" />;
 
 export default Posts;
