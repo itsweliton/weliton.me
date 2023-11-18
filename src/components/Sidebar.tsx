@@ -1,18 +1,22 @@
-import { Link } from "gatsby";
 import React from "react";
+import { Link } from "gatsby";
 import "../styles/sidebar.scss";
 
 const Sidebar: React.FC = () => {
   return (
     <nav className="sidebar">
+      <div className="header">
+        <h2>Weliton Soranzo</h2>
+        <p>Software Engineer</p>
+      </div>
       <ul>
-        <li>
+        <li className={location.pathname === "/" ? "active" : ""}>
           <Link to="/">Home</Link>
         </li>
-        <li>
+        <li className={location.pathname.startsWith("/about") ? "active" : ""}>
           <Link to="/about">About</Link>
         </li>
-        <li>
+        <li className={location.pathname.startsWith("/posts") ? "active" : ""}>
           <Link to="/posts">Posts</Link>
         </li>
       </ul>

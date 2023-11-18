@@ -21,13 +21,11 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
   `);
   return (
     <div className="layout">
-      <aside className="sidebar">
+      <aside className="layout-sidebar">
         <Sidebar />
+        <div className="background-image"></div>
       </aside>
-      <main className="main-content">
-        <h1>{pageTitle}</h1>
-        {children}
-      </main>
+      <main className="main-content">{children}</main>
     </div>
   );
 };

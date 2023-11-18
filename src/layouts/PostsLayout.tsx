@@ -12,7 +12,7 @@ type PostsLayoutProps = {
 const PostsLayout = ({ children, pageTitle }: PostsLayoutProps) => {
   return (
     <div className="layout">
-      <aside className="sidebar">
+      <aside>
         <Sidebar />
       </aside>
       <aside>

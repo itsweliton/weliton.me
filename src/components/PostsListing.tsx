@@ -1,7 +1,11 @@
 import * as React from "react";
 import { useStaticQuery, Link, graphql } from "gatsby";
+import { useLocation } from "@reach/router";
+import "../styles/posts-listing.scss";
 
 const PostsListing = () => {
+  const location = useLocation();
+
   const data = useStaticQuery(graphql`
     query PostsListingQuery {
       allMdx(sort: {frontmatter: {date: DESC}}) {
@@ -20,16 +24,26 @@ const PostsListing = () => {
   const posts = data.allMdx.nodes;
 
   return (
-    <ul>
-      {posts.map((post) => (
-        <li key={post.id}>
-          <Link to={`/posts/${post.frontmatter.slug}`}>
-            <h2>{post.frontmatter.title}</h2>
-            <p>Posted: {post.frontmatter.date}</p>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className="posts-listing">
+      <h3>Posts</h3>
+      <ul className="list">
+        {posts.map((post) => (
+          <li
+            key={post.id}
+            className={
+              location.pathname === `/posts/${post.frontmatter.slug}/`
+                ? "post-item active"
+                : "post-item"
+            }
+          >
+            <Link to={`/posts/${post.frontmatter.slug}`}>
+              <p className="post-title">{post.frontmatter.title}</p>
+              <p className="post-date">{post.frontmatter.date}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
