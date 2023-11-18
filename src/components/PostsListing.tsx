@@ -25,7 +25,9 @@ const PostsListing = () => {
 
   return (
     <div className="posts-listing">
-      <h3>Posts</h3>
+      <div className="listing-header">
+        <h3>Posts</h3>
+      </div>
       <ul className="list">
         {posts.map((post) => (
           <li

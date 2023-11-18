@@ -9,16 +9,18 @@ const BlogPost = ({ data, children }) => {
 
   return (
     <PostsLayout pageTitle={data.mdx.frontmatter.title}>
-      <p>{data.mdx.frontmatter.date}</p>
       <div>
-        {image && (
-          <GatsbyImage
-            image={image}
-            alt={data.mdx.frontmatter.hero_image_alt}
-          />
-        )}
+        <p>{data.mdx.frontmatter.date}</p>
+        <div>
+          {image && (
+            <GatsbyImage
+              image={image}
+              alt={data.mdx.frontmatter.hero_image_alt}
+            />
+          )}
+        </div>
+        {children}
       </div>
-      {children}
     </PostsLayout>
   );
 };
