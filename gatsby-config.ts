@@ -45,7 +45,7 @@ const config: GatsbyConfig = {
           google: [
             // You can also load fonts from Google Fonts if needed
           ],
-          custom: [
+          selfHosted: [
             {
               family: "Inter Regular",
               urls: ["/fonts/Inter-Regular.ttf"],
@@ -104,12 +104,6 @@ const config: GatsbyConfig = {
             },
           ],
         },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-layout`,
-      options: {
-        component: require.resolve(`./src/layouts/Layout.tsx`),
       },
     },
   ],

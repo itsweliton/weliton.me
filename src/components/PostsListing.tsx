@@ -4,7 +4,7 @@ import { useStaticQuery, Link, graphql } from "gatsby";
 const PostsListing = () => {
   const data = useStaticQuery(graphql`
     query PostsListingQuery {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMdx(sort: {frontmatter: {date: DESC}}) {
         nodes {
           frontmatter {
             date(formatString: "MMMM D, YYYY")
