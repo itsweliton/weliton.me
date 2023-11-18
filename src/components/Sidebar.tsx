@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "gatsby";
 import "../styles/sidebar.scss";
+import { useLocation } from "@reach/router";
 
 const Sidebar: React.FC = () => {
+  const location = useLocation();
   return (
     <nav className="sidebar">
       <div className="header">
