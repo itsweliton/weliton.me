@@ -1,0 +1,17 @@
+.sticky-header {
+  height: 22px;
+  position: sticky;
+  top: 0;
+
+  padding: 8px 12px;
+
+  background: rgba(50, 50, 50, 0);
+  box-shadow: rgba(0, 0, 0, 0) 0px 1px 3px;
+
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid #ededed;
+}
+
+.z-index-3 {
+  z-index: 3;
+}

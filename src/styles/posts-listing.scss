@@ -1,18 +1,20 @@
+@import "utils";
+
 .posts-listing {
   width: 20rem;
+
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+
   .listing-header {
-    position: sticky;
-    background: rgba(50, 50, 50, 0);
-    box-shadow: rgba(0, 0, 0, 0) 0px 1px 3px;
-    min-height: 48px;
-    backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid #ededed;
   }
   h3 {
     margin-left: 0.5rem;
   }
   .list {
-    margin: 0;
+    margin: 0 12px;
     padding: 0;
     list-style: none;
   }

@@ -25,7 +25,7 @@ const PostsListing = () => {
 
   return (
     <div className="posts-listing">
-      <div className="listing-header">
+      <div className="listing-header sticky-header">
         <h3>Posts</h3>
       </div>
       <ul className="list">

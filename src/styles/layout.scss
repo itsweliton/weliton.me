@@ -1,9 +1,7 @@
 @import "index";
 
 .layout {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-auto-flow: column;
+  display: flex;
   min-height: 100vh;
 
   @media screen and (max-width: #{$small-screen}) {
@@ -35,4 +33,9 @@
 
 .main-content {
   background-color: #fff;
+  width: 100%;
+  .content {
+    margin: 20px auto;
+    max-width: 48rem;
+  }
 }

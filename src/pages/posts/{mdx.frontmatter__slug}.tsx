@@ -3,13 +3,14 @@ import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import PostsLayout from "../../layouts/PostsLayout";
+import "../../styles/post-content.scss";
 
 const BlogPost = ({ data, children }) => {
   const image = getImage(data.mdx.frontmatter.hero_image);
 
   return (
     <PostsLayout pageTitle={data.mdx.frontmatter.title}>
-      <div>
+      <div className="post-content">
         <p>{data.mdx.frontmatter.date}</p>
         <div>
           {image && (

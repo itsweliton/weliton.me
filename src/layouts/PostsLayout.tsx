@@ -20,8 +20,13 @@ const PostsLayout = ({ children, pageTitle }: PostsLayoutProps) => {
         <PostsListing />
       </aside>
       <main className="main-content">
-        <h1>{pageTitle}</h1>
-        {children}
+        <div className="sticky-header z-index-3">
+          <p>{pageTitle}</p>
+        </div>
+        <div className="content">
+          <h1>{pageTitle}</h1>
+          {children}
+        </div>
       </main>
     </div>
   );
