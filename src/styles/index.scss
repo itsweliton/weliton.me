@@ -1,22 +1,4 @@
-$inter-regular: "Inter Regular", sans-serif;
-$inter-medium: "Inter Medium", sans-serif;
-$inter-extra-light: "Inter Extra Light", sans-serif;
-$inter-thin: "Inter Thin", sans-serif;
-$newsreader-extra-light: "Newsreader Extra Light", sans-serif;
-$newsreader-extra-light-italic: "Newsreader Extra Light Italic", sans-serif;
-$newsreader-light: "Newsreader Light", sans-serif;
-$newsreader-light-italic: "Newsreader Light Italic", sans-serif;
-$newsreader-italic: "Newsreader Italic", sans-serif;
-$newsreader-regular: "Newsreader Regular", sans-serif;
-$newsreader-medium: "Newsreader Medium", sans-serif;
-$newsreader-medium-italic: "Newsreader Medium Italic", sans-serif;
-$newsreader-semi-bold: "Newsreader Semi Bold", sans-serif;
-$newsreader-semi-bold-italic: "Newsreader Semi Bold Italic", sans-serif;
-
-$small-screen: 768px;
-$medium-screen: 992px;
-$large-screen: 1200px;
-$x-large-screen: 1600px;
+@import "variables";
 
 body {
   font-family: $inter-regular;

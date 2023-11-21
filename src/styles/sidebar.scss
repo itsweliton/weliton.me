@@ -1,17 +1,24 @@
+@import "variables";
+
 .sidebar {
-  padding: 20px;
+  padding: 14px;
 
   position: sticky;
   top: 0;
 
-  width: 14rem;
+  width: 18rem;
   height: 100%;
+  box-sizing: border-box;
 
-  background-color: hsla(0, 6%, 93%, 0.659);
-  -webkit-backdrop-filter: blur(15px) saturate(86%);
-  backdrop-filter: blur(15px) saturate(86%);
+  border-right: 1px solid $border-color;
+  background: $background-color;
+  backdrop-filter: blur(27.5px);
+
+  color: $white;
+
   z-index: 2;
   .header {
+    margin-left: 0.8rem;
     margin-bottom: 16px;
     h2 {
       margin: 0;
@@ -25,28 +32,58 @@
   }
   ul {
     list-style: none;
-    margin: 0;
+    margin: 3rem 0;
     padding: 0;
+    .label {
+      color: #a5a5a5;
+      font-size: 0.875rem;
+      margin-left: 0.875rem;
+      text-transform: capitalize;
+    }
   }
   li {
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 500;
-    height: 28px;
-    padding: 0.225rem 0.5rem;
-    border-radius: 6px;
-    margin: 4px 0;
+
+    padding: 0.5rem 0.875rem;
+    margin: 0.5rem 0;
+
+    border: 1px solid transparent;
+
     display: flex;
     align-items: center;
+
+    border-radius: 12px;
+
+    transition: background-color 0.3s ease-in-out;
+
     &:hover {
-      background-color: hsl(0deg 2.43% 82.6% / 58%);
+      background-color: $background-item-active;
     }
     a {
       width: 100%;
+      height: 100%;
+      font-family: $inter-medium;
     }
     &.active {
-      background-color: #838383b0;
-      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.19);
+      background-color: $background-item-active;
+    }
+    .sidebar-link {
+      align-items: center;
+      display: flex;
+      svg {
+        margin-right: 0.875rem;
+      }
+    }
+    .external-link {
+      svg {
+        &:last-child {
+          position: absolute;
+          right: 0.875rem;
+        }
+      }
     }
   }
 }
