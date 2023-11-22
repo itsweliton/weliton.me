@@ -5,8 +5,8 @@ import PostsListing from "../../components/PostsListing";
 
 const Posts = () => {
   return (
-    <Layout>
-      <PostsListing />
+    <Layout pageTitle="Posts">
+      <div></div>
     </Layout>
   );
 };

@@ -2,14 +2,14 @@ import * as React from "react";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import PostsLayout from "../../layouts/PostsLayout";
+import Layout from "../../layouts/Layout";
 import "../../styles/post-content.scss";
 
 const BlogPost = ({ data, children }) => {
   const image = getImage(data.mdx.frontmatter.hero_image);
 
   return (
-    <PostsLayout pageTitle={data.mdx.frontmatter.title}>
+    <Layout pageTitle={data.mdx.frontmatter.title}>
       <div className="post-content">
         <p>{data.mdx.frontmatter.date}</p>
         <div>
@@ -22,7 +22,7 @@ const BlogPost = ({ data, children }) => {
         </div>
         {children}
       </div>
-    </PostsLayout>
+    </Layout>
   );
 };
 

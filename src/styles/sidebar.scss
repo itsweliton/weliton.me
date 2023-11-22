@@ -1,13 +1,14 @@
 @import "variables";
 
 .sidebar {
+  display: block;
   padding: 14px;
 
-  position: sticky;
+  position: fixed;
   top: 0;
 
   width: 18rem;
-  height: 100%;
+  height: 100vh;
   box-sizing: border-box;
 
   border-right: 1px solid $border-color;
@@ -15,6 +16,11 @@
   backdrop-filter: blur(27.5px);
 
   color: $white;
+
+  @media screen and (min-width: #{$medium-screen}) {
+    position: sticky;
+    height: 100vh;
+  }
 
   z-index: 2;
   .header {
@@ -88,8 +94,13 @@
   }
 }
 
-@media (max-width: 767px) {
-  .sidebar {
-    display: none;
-  }
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18rem;
+  height: 100%;
+  background-image: url("../images/sidebar-bg.png"); /* Adjust the path to your image */
+  background-size: cover;
+  z-index: -1;
 }
