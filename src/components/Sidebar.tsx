@@ -25,6 +25,9 @@ const Sidebar = ({ isOpen, close }: SidebarProps) => {
         <div className="header">
           <h2>Weliton Soranzo</h2>
           <p>Software Engineer</p>
+          <div className="close-icon" onClick={() => close(false)}>
+            <ArrowIcon />
+          </div>
         </div>
         <ul>
           <li className={location.pathname === "/" ? "active" : ""}>

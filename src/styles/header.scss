@@ -1,0 +1,13 @@
+@import "./variables.scss";
+
+.header {
+  z-index: 1;
+}
+
+@media screen and (min-width: #{$medium-screen}) {
+  .header {
+    .icon {
+      display: none;
+    }
+  }
+}
