@@ -41,14 +41,7 @@
   }
 }
 
-.main-content {
+.content {
   flex-grow: 1;
   background-color: #fff;
-
-  @media screen and (min-width: #{$medium-screen}) {
-    .content {
-      margin: 20px auto;
-      max-width: 48rem;
-    }
-  }
 }

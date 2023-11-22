@@ -1,3 +1,22 @@
+@import "variables";
+
+.post-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  .posts-listing {
+    display: none;
+  }
+}
+
+@media screen and (min-width: #{$medium-screen}) {
+  .post-details-wrapper {
+    flex-direction: row;
+    .posts-listing {
+      display: block;
+    }
+  }
+}
+
 .post-content {
   p {
     font-weight: 300 !important;

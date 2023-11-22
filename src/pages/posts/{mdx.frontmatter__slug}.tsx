@@ -4,23 +4,27 @@ import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Layout from "../../layouts/Layout";
 import "../../styles/post-content.scss";
+import PostsListing from "../../components/PostsListing";
 
 const BlogPost = ({ data, children }) => {
   const image = getImage(data.mdx.frontmatter.hero_image);
 
   return (
     <Layout pageTitle={data.mdx.frontmatter.title}>
-      <div className="post-content">
-        <p>{data.mdx.frontmatter.date}</p>
-        <div>
-          {image && (
-            <GatsbyImage
-              image={image}
-              alt={data.mdx.frontmatter.hero_image_alt}
-            />
-          )}
+      <div className="post-details-wrapper">
+        <PostsListing />
+        <div className="post-content">
+          <p>{data.mdx.frontmatter.date}</p>
+          <div>
+            {image && (
+              <GatsbyImage
+                image={image}
+                alt={data.mdx.frontmatter.hero_image_alt}
+              />
+            )}
+          </div>
+          {children}
         </div>
-        {children}
       </div>
     </Layout>
   );

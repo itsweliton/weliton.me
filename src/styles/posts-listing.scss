@@ -1,15 +1,14 @@
 @import "utils";
+@import "variables";
 
 .posts-listing {
-  width: 20rem;
-
+  width: 100vw;
+  min-width: 100vw;
   height: 100vh;
   position: sticky;
   top: 0;
   overflow-y: auto;
 
-  .listing-header {
-  }
   h3 {
     margin-left: 0.5rem;
   }
@@ -37,5 +36,12 @@
         color: #fff;
       }
     }
+  }
+}
+
+@media screen and (min-width: #{$medium-screen}) {
+  .posts-listing {
+    width: 20rem;
+    min-width: 20rem;
   }
 }
