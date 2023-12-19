@@ -6,6 +6,9 @@
 
 @media screen and (min-width: #{$medium-screen}) {
   .header {
+    p {
+      margin-left: 20rem;
+    }
     .icon {
       display: none;
     }

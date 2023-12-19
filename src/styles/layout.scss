@@ -21,6 +21,11 @@
   align-items: center;
 }
 
+.content {
+  flex-grow: 1;
+  background-color: #fff;
+}
+
 @media screen and (min-width: #{$medium-screen}) {
   .layout {
     flex-direction: row;
@@ -38,9 +43,4 @@
   .mob-nav {
     display: none;
   }
-}
-
-.content {
-  flex-grow: 1;
-  background-color: #fff;
 }

@@ -10,20 +10,22 @@ const BlogPost = ({ data, children }) => {
   const image = getImage(data.mdx.frontmatter.hero_image);
 
   return (
-    <Layout pageTitle={data.mdx.frontmatter.title}>
+    <Layout pageTitle="">
       <div className="post-details-wrapper">
         <PostsListing />
         <div className="post-content">
-          <p>{data.mdx.frontmatter.date}</p>
           <div>
             {image && (
               <GatsbyImage
                 image={image}
+                className="post-image"
                 alt={data.mdx.frontmatter.hero_image_alt}
               />
             )}
           </div>
-          {children}
+          <h1>{data.mdx.frontmatter.title}</h1>
+          <p>{data.mdx.frontmatter.date}</p>
+          <div className="rich-text">{children}</div>
         </div>
       </div>
     </Layout>

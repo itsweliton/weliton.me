@@ -1,4 +1,6 @@
 .sticky-header {
+  display: flex;
+
   height: 22px;
   position: sticky;
   top: 0;
@@ -10,6 +12,9 @@
 
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid #ededed;
+  svg {
+    margin-right: 0.75rem;
+  }
 }
 
 .z-index-3 {

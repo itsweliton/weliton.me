@@ -6,8 +6,8 @@ import "../styles/index.scss";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main>
-      <Layout pageTitle="Its Weliton">
+    <Layout>
+      <main className="main-content">
         <h1>Home Page</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
@@ -15,8 +15,8 @@ const IndexPage: React.FC<PageProps> = () => {
           voluptatibus quae natus doloremque consequuntur. Quisquam, quae
           voluptates. Quisquam, quae voluptates.
         </p>
-      </Layout>
-    </main>
+      </main>
+    </Layout>
   );
 };
 

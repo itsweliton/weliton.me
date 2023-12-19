@@ -26,7 +26,9 @@ const Sidebar = ({ isOpen, close }: SidebarProps) => {
           <h2>Weliton Soranzo</h2>
           <p>Software Engineer</p>
           <div className="close-icon" onClick={() => close(false)}>
-            <ArrowIcon />
+            <button className="closeMenu" id="closeMenu">
+              ×
+            </button>
           </div>
         </div>
         <ul>

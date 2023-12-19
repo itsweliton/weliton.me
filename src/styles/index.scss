@@ -21,3 +21,14 @@ h3,
 h2 {
   margin: 0;
 }
+
+.main-content {
+  max-width: 42rem;
+  margin: 2rem 1rem;
+}
+
+@media screen and (min-width: #{$medium-screen}) {
+  .main-content {
+    margin: 2rem auto;
+  }
+}

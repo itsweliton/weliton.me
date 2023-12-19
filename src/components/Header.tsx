@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ mobOpen, setMobOpen, pageTitle }) => {
   return (
     <div className="header sticky-header">
       <MenuIcon className="icon" onClick={() => setMobOpen(true)} />
-      {pageTitle ? <h2>{pageTitle}</h2> : null}
+      {pageTitle ? <p>{pageTitle}</p> : null}
     </div>
   );
 };
