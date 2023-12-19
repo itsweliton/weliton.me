@@ -32,3 +32,36 @@ h2 {
     margin: 2rem auto;
   }
 }
+
+.intro {
+  line-height: 135%; /* 21.6px */
+  color: #1b1b1b;
+}
+
+.link {
+  color: #000; // Normal state color
+  text-decoration: none; // Removes underline
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+  position: relative;
+  &:hover {
+    color: #5b3ac2;
+    text-decoration: none;
+  }
+  &::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 4px;
+    background: #5b3ac2;
+    transition: width 0.3s;
+    height: 10px;
+    background: hsl(258.9deg 53.97% 49.41% / 44%);
+  }
+
+  &:hover::before {
+    width: 100%;
+    transition: width 0.2s;
+  }
+}
