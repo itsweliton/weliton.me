@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("posts");
+---
+
+<Layout title="Weliton's blog">
+  <body class="dark-mode">
+    <main class="max-w-screen-sm">
+      <section class="mt-10">
+        <h1
+          class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-500 w-fit"
+        >
+          Hey! It's Weliton
+        </h1>
+        <p class="text-xs mt-2">
+          This is my place to share my thoughts, stuff I like to do, photography
+          and technology
+        </p>
+
+        <div class="mt-8">
+          <p class="font-bold text-sm mb-2 text-neutral-600">Thoughts</p>
+          <ul class="list-none p-0" id="list">
+						{
+							allPosts.map((post) => (
+								<li class="mb-4 flex justify-between items-center text-sm border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
+									<a href={`/posts/${post.slug}/`} >{post.data.title}</a>
+									<span class="font-mono capitalize">{post.data.category} ~ {new Date(`${post.data.pubDate}`).getFullYear()}</span>
+								</li>
+							))
+						}
+          </ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 800px;
+    color: rgb(238, 238, 238);
+    font-size: 20px;
+    line-height: 1.6;
+  }
+</style>

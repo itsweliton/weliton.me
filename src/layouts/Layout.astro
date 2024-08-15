@@ -1,0 +1,48 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+				<!-- Include Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+	</head>
+	<body class="bg-gray-900 text-gray-100 font-sans">
+		<header>
+      <nav class="m-2">
+				<div class="flex flex-col justify-between	space-y-4 md:flex-row md:space-y-0 md:space-x-4"> <!-- Responsive flex classes -->
+					<ul class="flex space-x-4">
+						<li><a href="/" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Home</a></li>
+						<li><a href="/work" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Work</a></li>
+						<li><a href="/microblog" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Rankings</a></li>
+						<li><a href="/photos" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Photos</a></li>
+					</ul>
+					<ul class="flex space-x-4">
+						<li><a href="https://twitter.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Twitter</a></li>
+						<li><a href="https://github.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">GitHub</a></li>
+						<li><a href="https://youtube.com" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">YouTube</a></li>
+						<li><a href="https://dribbble.com" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Dribbble</a></li>
+					</ul>
+				</div>
+      </nav>
+    </header>
+		<slot />
+		<footer class="text-center py-4 text-xs">
+      <p>© 2024 Weliton - All Rights Reserved</p>
+    </footer>
+	</body>
+</html>

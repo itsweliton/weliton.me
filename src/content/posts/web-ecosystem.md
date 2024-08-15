@@ -1,7 +1,15 @@
 ---
 title: "Getting to Know the Web Ecosystem"
-date: "2020-04-28T15:38:11.844Z"
+pubDate: 2020-04-28T15:38:11.844Z
+category: 'fundamentals'
+description: "Getting to Know the Web Ecosystem"
+author: "Weliton Soranzo"
+image:
+  url: "https://astro.build/assets/blog/astro-1-release-update/cover.jpeg"
+  alt: "The Astro logo with the word One."
+tags: ["astro", "blogging", "learning in public"]
 ---
+
 
 This article aims to bring more info related the basics of web ecosystem, to understand the basics is extremely important to developers who are starting in Front End or Back End development.
 

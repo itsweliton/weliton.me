@@ -1,6 +1,13 @@
 ---
-title: How to solve problems as a developer
-date: "2021-05-17T15:16:18.188Z"
+title: "How to solve problems as a developer"
+pubDate: 2021-05-17T15:16:18.188Z
+category: 'tech'
+description: "O melhor time do ponto de vista de um desenvolvedor."
+author: "Weliton Soranzo"
+image:
+  url: "https://astro.build/assets/blog/astro-1-release-update/cover.jpeg"
+  alt: "The Astro logo with the word One."
+tags: ["astro", "blogging", "learning in public"]
 ---
 
 As Developer sometimes we face the well known issue of being blocked not knowing exactly where to go, it can be a bug, a complex and difficult task that is beyond our comprehension. 
