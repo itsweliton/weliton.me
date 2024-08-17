@@ -1,9 +1,10 @@
 ---
 interface Props {
 	title: string;
+	pageTitle: string;
 }
 
-const { title } = Astro.props;
+const { title, pageTitle } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,14 +22,14 @@ const { title } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
 	</head>
-	<body class="bg-gray-900 text-gray-100 font-sans">
-		<header>
+	<body class="dark-mode bg-gray-900 bg-bullet-journal bg-dots text-gray-100 font-sans">
+		<header class="overflow-auto">
       <nav class="m-2">
 				<div class="flex flex-col justify-between	space-y-4 md:flex-row md:space-y-0 md:space-x-4"> <!-- Responsive flex classes -->
 					<ul class="flex space-x-4">
 						<li><a href="/" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Home</a></li>
 						<li><a href="/work" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Work</a></li>
-						<li><a href="/microblog" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Rankings</a></li>
+						<li><a href="/books" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Books</a></li>
 						<li><a href="/photos" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Photos</a></li>
 					</ul>
 					<ul class="flex space-x-4">
@@ -40,9 +41,28 @@ const { title } = Astro.props;
 				</div>
       </nav>
     </header>
-		<slot />
+		<main class="max-w-screen-sm m-auto mt-20">
+			<h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-500 w-fit mb-4">
+				{pageTitle}
+			</h1>
+			<slot />
+		</main>
 		<footer class="text-center py-4 text-xs">
       <p>© 2024 Weliton - All Rights Reserved</p>
     </footer>
 	</body>
 </html>
+
+<style>
+	html body {
+		margin: 0 auto;
+    padding: 1rem;
+    color: rgb(238, 238, 238);
+    font-size: 20px;
+    line-height: 1.6;
+		height: 100%;
+	}
+	header {
+		width: 100%;
+	}
+</style>

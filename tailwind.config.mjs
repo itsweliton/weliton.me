@@ -9,13 +9,21 @@ export default {
         'mobile': {'max': '768px'},
         'desktop': {'min': '769px'},
       },
+			backgroundImage: {
+        'bullet-journal': 'radial-gradient(circle, #2c2c2c 1px, transparent 1px)',
+      },
+      backgroundSize: {
+        'dots': '1.5rem 1.5rem',
+      },
     },
+		
 		colors: {
 			...colors,
 			gray: {
 				900: '#121212',
 				800: '#1a1a1a',
 				100: '#888888',
+				400: 'rgb(156 163 175)'
 			},
 		},
 		fontFamily: {
@@ -23,5 +31,5 @@ export default {
 			mono: ['DM Mono', 'monospace'],
 		},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/typography')],
 }

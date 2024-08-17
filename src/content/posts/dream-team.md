@@ -5,14 +5,10 @@ category: 'management'
 description: "O melhor time do ponto de vista de um desenvolvedor."
 author: "Weliton Soranzo"
 image:
-  url: "https://astro.build/assets/blog/astro-1-release-update/cover.jpeg"
-  alt: "The Astro logo with the word One."
-tags: ["astro", "blogging", "learning in public"]
+  url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+  alt: "Time de desenvolvimento"
+tags: ["management"]
 ---
-
-
-![alt text](https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80 "Time de desenvolvimento")
-Time de desenvolvimento (foto do [Unsplash](https://unsplash.com/photos/QckxruozjRg))
 
 ### Disclaimer
 

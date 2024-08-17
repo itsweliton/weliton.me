@@ -1,0 +1,87 @@
+---
+const { name, yearRead, author, cover, link, rating, status } = Astro.props;
+const year = new Date(`${yearRead}`).getFullYear()
+---
+
+<div class="mb-6">
+  <div class="book small book-three-d">
+    <img src={cover} alt={`Cover of the book ${name}`} />
+  </div>
+  <div class="text-sm font-light">
+    <p class="text-slate-50">{name}</p>
+    <p class="text-xs mb-1">{author}</p>
+    <span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{status === 'Readed' ? `${status} ${year} \u2022 ${rating} ⭐️` : `${status}`}</span>
+  </div>
+</div>
+
+<style lang="scss">
+$book-width: 300px;
+$book-aspect-ratio: 1.5;
+$small-book-width: 150px;
+
+.book {
+  position: relative;
+  width: $book-width;
+  height: calc($book-width * $book-aspect-ratio);
+  overflow: hidden;
+  border-radius: 6px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  box-shadow: -4px 4px 12.4px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  margin-bottom: 6px;
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &.small {
+    width: $small-book-width;
+    height: calc($small-book-width * $book-aspect-ratio);
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $book-width;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(230, 230, 230, 0.18) 6%,
+      rgba(218, 218, 218, 0.04) 8%,
+      rgba(143, 143, 143, 0) 80%,
+      rgba(131, 131, 131, 0.11) 92.5%,
+      rgba(0, 0, 0, 0.2) 93.5%,
+      rgba(115, 115, 115, 0) 95%,
+      rgba(255, 255, 255, 0.02) 99%,
+      rgba(0, 0, 0, 0.2) 99.04%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  }
+}
+
+.book-three-d {
+  cursor: pointer;
+  transform-origin: left center;
+  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.4s ease, box-shadow 0.4s ease;
+  &:hover {
+    transform: perspective(800px) rotateY(-25deg) rotateX(10deg) translateX(10px) translateZ(16px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin: 100px 0;
+  background-color: #121212;
+}
+</style>

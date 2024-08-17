@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Book from './../components/Book.astro';
+
+const allBooks = await getCollection("books");
+const statusOrder = {
+  Reading: 1,
+  Wishlist: 2,
+  Readed: 3,
+};
+const sortedBooks = allBooks.sort((a, b) => {
+  return statusOrder[a.data.status] - statusOrder[b.data.status];
+});
+---
+
+<Layout title="Books" pageTitle="My Bookshelf">
+  <section>
+    <div class="max-w-lg flex flex-row flex-wrap justify-between	">
+      {
+        sortedBooks.map((book) => (
+          <Book key={book.id} {...book.data} />
+        ))
+      }
+    </div>
+  </section>
+</Layout>

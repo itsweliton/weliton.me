@@ -1,11 +1,17 @@
 ---
 import BaseLayout from "./Layout.astro";
 const { frontmatter } = Astro.props;
+const publishedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
 ---
-<BaseLayout title={frontmatter.title}>
-  <p>{frontmatter.pubDate.toString().slice(0,10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-  <slot />
+<BaseLayout title={frontmatter.title} pageTitle={frontmatter.title}>
+  <div class="text-sm">
+    <span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{publishedDate}</span>
+    <img src={frontmatter.image.url} alt={frontmatter.image.alt} class="my-4 h-48 w-full object-cover" />
+    <slot/>
+  </div>
+  
 </BaseLayout>
