@@ -10,12 +10,21 @@ const allAlbums = await getCollection("albums");
 
 <Layout title="Albums" pageTitle="My Favorite albums">
   <section>
-    <div class="max-w-lg flex flex-row flex-wrap justify-between	">
+    <div class="flex flex-row justify-between mb-6">
       {
-        allAlbums.map((album) => (
-        <Album {...album.data} />
+        allAlbums.slice(0,3).map((album) => (
+          <Album {...album.data} />
         ))
       }
+    </div>
+    <div>
+      {
+      allAlbums.slice(3).map((album) => (
+        <li class="mb-4 flex justify-between items-center text-sm border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
+          <p>{album.data.title}</p>
+          <span class="font-mono capitalize">{album.data.artist} ~ {new Date(`${album.data.releaseDate}`).getFullYear()}</span>
+        </li>
+      ))}
     </div>
   </section>
 </Layout>

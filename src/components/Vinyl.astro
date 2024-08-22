@@ -8,7 +8,7 @@ const optimizedBackground = await getImage({src: coverUrl, format: 'webp'});
 <div class="mb-6">
   <div class="album" data-cover-url={coverUrl}>
 		<div class="cover">
-			<Image class="image" src={coverUrl} alt={coverAlt} width={300} height={300}/>
+			<Image class="image" src={coverUrl} alt={coverAlt} width={150} height={150}/>
 		</div>
 		<div class="vinyl">
 			<div class="vinyl-cover" style={`background-image: url(${optimizedBackground.src});`}></div>
@@ -18,8 +18,8 @@ const optimizedBackground = await getImage({src: coverUrl, format: 'webp'});
 
 <style lang="scss">
 .album {
-	--album-size: 300px; /* Base size */
-	--vinyl-size: 280px; /* Base vinyl size */
+	--album-size: 150px; /* Base size */
+	--vinyl-size: 130px; /* Base vinyl size */
 	--border-radius: 3px; /* Border radius */
 	--cover-translate: -10px; /* Translation for hover */
 	--cover-rotate: -2deg; /* Rotation for hover */
@@ -29,7 +29,6 @@ const optimizedBackground = await getImage({src: coverUrl, format: 'webp'});
 	position: relative;
 	width: var(--album-size);
 	height: var(--album-size);
-	margin: 1rem 100px;
 
 	.cover {
 		position: relative;

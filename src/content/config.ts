@@ -26,7 +26,7 @@ const booksCollection = defineCollection({
     link: z.string(),
     yearRead: z.date().optional(),
     rating: z.string().optional(),
-    status: z.enum(["Readed", "Wishlist", "Reading"]),
+    status: z.enum(["Read", "Wishlist", "Reading"]),
   }),
 });
 
@@ -45,9 +45,25 @@ const albumsCollection = defineCollection({
     }),
 });
 
+const moviesCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      releaseDate: z.date(),
+      director: z.string(),
+      rating: z.string().optional(),
+      posterUrl: image(),
+      posterAlt: z.string(),
+      genres: z.array(z.string()),
+      movieUrl: z.string(),
+    }),
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   posts: postsCollection,
   books: booksCollection,
   albums: albumsCollection,
+  movies: moviesCollection,
 };
