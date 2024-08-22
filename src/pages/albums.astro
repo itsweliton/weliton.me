@@ -1,0 +1,21 @@
+---
+import Album from './../components/Album.astro';
+import Layout from "../layouts/Layout.astro";
+
+import { getCollection } from "astro:content";
+
+const allAlbums = await getCollection("albums");
+---
+
+
+<Layout title="Albums" pageTitle="My Favorite albums">
+  <section>
+    <div class="max-w-lg flex flex-row flex-wrap justify-between	">
+      {
+        allAlbums.map((album) => (
+        <Album {...album.data} />
+        ))
+      }
+    </div>
+  </section>
+</Layout>
