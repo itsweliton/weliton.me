@@ -12,9 +12,8 @@ const projects = await getCollection("projects");
 projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="Work Experience & Projects" pageTitle="My Work Experience & Projects" widthSize="max-w-screen-md">
+<Layout title="Work Experience & Projects" pageTitle="My Work Experience & Projects" widthSize="max-w-screen-sm">
   <section class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Work Experience</h2>
     <ul>
       {workPosts.map((post) => (
         <WorkExperience
@@ -29,7 +28,6 @@ projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   </section>
 
   <section>
-    <h2 class="text-2xl font-bold mb-4">Projects</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project) => (
         <Project

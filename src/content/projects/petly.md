@@ -1,13 +1,12 @@
 ---
-title: "My Awesome Project"
-date: 2023-06-15
-techs: ["React", "Node.js", "MongoDB"]
-description: "A brief description of my awesome project and what it does."
+title: 'Petly'
+date: 2022-06-15
+techs: ['React', 'Node.js', 'Firebase']
+description: 'A platform for pet owners to find and share pet-related services.'
 media:
-  - "../../assets/images/projects/petly-home.png"
-  - "../../assets/images/movies/interestellar.jpg"
-status: "Cancelled"
-url: "https://www.google.com"
+  - '../../assets/images/projects/petly-home.png'
+status: 'Cancelled'
+url: 'https://www.google.com'
 ---
 
 You can add more content about the project here if needed.

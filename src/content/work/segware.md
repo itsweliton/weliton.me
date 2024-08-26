@@ -1,9 +1,9 @@
 ---
-title: "Senior Frontend Developer"
-startDate: 2016-04-16
-endDate: 2018-03-31
-company: "Ahgora Sistemas"
-location: "Florianópolis, Brazil"
-description: "Developer at Ahgora Sistemas focusing on web applications using React, Redux, and Node.js"
-tags: ["frontend", "react", "redux", "nodejs"]
+title: 'Senior Software Developer'
+startDate: 2019-04-16
+endDate: 2019-03-31
+company: 'Segware'
+location: 'Brazil'
+description: ''
+tags: ['frontend', 'react', 'redux', 'nodejs']
 ---

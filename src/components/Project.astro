@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { ProjectStatus } from '../types/project-status';
+import { ProjectStatus } from '../types/project-status.ts';
 
 interface Props {
   title: string;
@@ -17,18 +17,18 @@ const { title, url, description, techs, date, status, media } = Astro.props;
 const projectId = `project-${Math.random().toString(36).slice(2, 11)}`;
 ---
 
-<div class="overflow-hidden" data-project-id={projectId}>
-  {media && media.length > 1 && (
+<div class="overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105" data-project-id={projectId}>
+  {media && media.length >= 1 && (
     <div class="relative h-48 group mb-4 rounded-lg overflow-hidden">
       {media.map((mediaItem, mediaIndex) => (
         <Image
-        src={mediaItem}
-        alt={`${title} - Image ${mediaIndex + 1}`}
-        width={800}
-        height={384}
-        class={`w-full h-48 object-cover absolute top-0 left-0 transition-opacity duration-500 ease-in-out ${mediaIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
-        data-carousel-item
-      />
+          src={mediaItem}
+          alt={`${title} - Image ${mediaIndex + 1}`}
+          width={800}
+          height={384}
+          class={`w-full h-48 object-cover absolute top-0 left-0 transition-opacity duration-500 ease-in-out ${mediaIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
+          data-carousel-item
+        />
     ))}
     {media.length > 1 && (
       <>
@@ -50,17 +50,19 @@ const projectId = `project-${Math.random().toString(36).slice(2, 11)}`;
   </div>
   )}
   <div>
-    <h3 class="font-normal text-base">{url ? (
-      <a href={url} target="_blank" rel="noopener noreferrer" class="hover:underline">
-        {title}
-      </a>
-    ) : (
-      title
-    )}</h3>
-    <p class="text-sm text-gray-400 mb-2">{description}</p>
+    <h3 class="font-normal text-sm text-slate-200">
+      {url ? (
+        <a href={url} target="_blank" rel="noopener noreferrer" class="hover:underline">
+          {title}
+        </a>
+        ) : (
+          title
+        )}
+    </h3>
+    <p class="text-xs text-gray-100 mb-2">{description}</p>
     <div class="flex flex-wrap gap-2 mb-2">
       {techs.map((tech) => (
-        <span class="font-mono text-xs rounded bg-zinc-800 py-0.5 px-1">{tech}</span>
+        <span class="font-mono text-xs rounded bg-zinc-800 py-0.5 px-1 lowercase">{tech}</span>
       ))}
     </div>
     <div class="flex justify-between items-center text-sm font-mono">
@@ -68,11 +70,12 @@ const projectId = `project-${Math.random().toString(36).slice(2, 11)}`;
       {(() => {
         const statusConfig = {
           'Completed': { bg: 'bg-green-600', text: 'text-white' },
+          'Running': { bg: 'bg-green-600', text: 'text-white' },
           'In Progress': { bg: 'bg-yellow-600', text: 'text-black' },
           'Planned': { bg: 'bg-blue-600', text: 'text-white' },
           'Cancelled': { bg: 'bg-gray-600', text: 'text-white' }
         } as const;
-        const { bg, text } = statusConfig[status];
+        const { bg, text } = statusConfig[status as keyof typeof ProjectStatus];
         return (
           <span class={`capitalize text-xs rounded ${bg} ${text} py-0.5 px-1`}>
             {status}

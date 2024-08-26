@@ -1,13 +1,12 @@
 ---
-title: "Espresso Desk"
-date: 2023-06-15
-techs: ["React", "Node.js", "MongoDB"]
-description: "A brief description of my awesome project and what it does."
+title: 'Galactic Dark'
+date: 2024-08-20
+techs: ['VSCode']
+description: 'A theme for VSCode based on my personal preferences.'
 media:
-  - "../../assets/images/projects/petly-home.png"
-  - "../../assets/images/movies/interestellar.jpg"
-status: "Completed"
-url: "https://www.google.com"
+  - '../../assets/images/projects/Galacticdark.png'
+status: 'Completed'
+url: 'https://marketplace.visualstudio.com/items?itemName=itsweliton.galactic-dark'
 ---
 
 You can add more content about the project here if needed.

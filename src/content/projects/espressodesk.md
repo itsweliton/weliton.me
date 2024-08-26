@@ -1,13 +1,12 @@
 ---
-title: "Espresso Desk"
-date: 2023-06-15
-techs: ["React", "Node.js", "MongoDB"]
-description: "A brief description of my awesome project and what it does."
+title: 'Espresso Desk'
+date: 2024-06-15
+techs: ['React', 'Next.js', 'Strapi']
+description: 'Find the best coffee shops to work from in your area.'
 media:
-  - "../../assets/images/projects/petly-home.png"
-  - "../../assets/images/movies/interestellar.jpg"
-status: "Completed"
-url: "https://www.google.com"
+  - '../../assets/images/projects/espressodesk.png'
+status: 'Running'
+url: 'https://espressodesk.io'
 ---
 
 You can add more content about the project here if needed.
