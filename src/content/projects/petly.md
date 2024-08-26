@@ -5,7 +5,7 @@ techs: ['React', 'Node.js', 'Firebase']
 description: 'A platform for pet owners to find and share pet-related services.'
 media:
   - '../../assets/images/projects/petly-home.png'
-status: 'Cancelled'
+status: 'Abandoned'
 url: 'https://www.google.com'
 ---
 

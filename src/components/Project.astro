@@ -17,7 +17,7 @@ const { title, url, description, techs, date, status, media } = Astro.props;
 const projectId = `project-${Math.random().toString(36).slice(2, 11)}`;
 ---
 
-<div class="overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105" data-project-id={projectId}>
+<a href={url} target="_blank" rel="noopener noreferrer" class="block overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105" data-project-id={projectId}>
   {media && media.length >= 1 && (
     <div class="relative h-48 group mb-4 rounded-lg overflow-hidden">
       {media.map((mediaItem, mediaIndex) => (
@@ -29,35 +29,37 @@ const projectId = `project-${Math.random().toString(36).slice(2, 11)}`;
           class={`w-full h-48 object-cover absolute top-0 left-0 transition-opacity duration-500 ease-in-out ${mediaIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
           data-carousel-item
         />
-    ))}
-    {media.length > 1 && (
-      <>
-        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-carousel-prev>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-carousel-next>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-        <div id="carousel-indicator" class="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-full text-[10px]">
-          1 / {media.length}
-        </div>
-      </>
-    )}
-  </div>
+      ))}
+      {(() => {
+        return (
+          <span class={`capitalize text-xs rounded bg-zinc-800 text-zinc-300 py-0.5 px-1 absolute bottom-2 right-2 z-10`}>
+            {status}
+          </span>
+        );
+      })()}
+      {media.length > 1 && (
+        <>
+          <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-carousel-prev>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-carousel-next>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          <div id="carousel-indicator" class="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-full text-[10px]">
+            1 / {media.length}
+          </div>
+        </>
+      )}
+    </div>
   )}
   <div>
-    <h3 class="font-normal text-sm text-slate-200">
-      {url ? (
-        <a href={url} target="_blank" rel="noopener noreferrer" class="hover:underline">
-          {title}
-        </a>
-        ) : (
-          title
-        )}
+    <h3 class="flex justify-between items-center font-normal text-sm text-slate-200 mb-1">
+      <span>{title}</span>
+      <span class="text-xs font-mono text-gray-100">{new Date(date).getFullYear()}</span>
     </h3>
     <p class="text-xs text-gray-100 mb-2">{description}</p>
     <div class="flex flex-wrap gap-2 mb-2">
@@ -65,26 +67,8 @@ const projectId = `project-${Math.random().toString(36).slice(2, 11)}`;
         <span class="font-mono text-xs rounded bg-zinc-800 py-0.5 px-1 lowercase">{tech}</span>
       ))}
     </div>
-    <div class="flex justify-between items-center text-sm font-mono">
-      <span>{new Date(date).getFullYear()}</span>
-      {(() => {
-        const statusConfig = {
-          'Completed': { bg: 'bg-green-600', text: 'text-white' },
-          'Running': { bg: 'bg-green-600', text: 'text-white' },
-          'In Progress': { bg: 'bg-yellow-600', text: 'text-black' },
-          'Planned': { bg: 'bg-blue-600', text: 'text-white' },
-          'Cancelled': { bg: 'bg-gray-600', text: 'text-white' }
-        } as const;
-        const { bg, text } = statusConfig[status as keyof typeof ProjectStatus];
-        return (
-          <span class={`capitalize text-xs rounded ${bg} ${text} py-0.5 px-1`}>
-            {status}
-          </span>
-        );
-      })()}
-    </div>
   </div>
-</div>
+</a>
 
 <script is:inline>
 

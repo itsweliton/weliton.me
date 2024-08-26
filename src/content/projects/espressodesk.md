@@ -5,7 +5,7 @@ techs: ['React', 'Next.js', 'Strapi']
 description: 'Find the best coffee shops to work from in your area.'
 media:
   - '../../assets/images/projects/espressodesk.png'
-status: 'Running'
+status: 'Ongoing'
 url: 'https://espressodesk.io'
 ---
 

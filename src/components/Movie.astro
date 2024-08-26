@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 const { title, releaseDate, director, rating, posterUrl, posterAlt, genres, movieUrl } = Astro.props;
-const formattedDate = new Date(releaseDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const formattedDate = new Date(releaseDate).toLocaleDateString('en-US', { year: 'numeric' });
 ---
 
 <div class="mb-6">
@@ -13,16 +13,13 @@ const formattedDate = new Date(releaseDate).toLocaleDateString('en-US', { month:
 					<div class="image-overlay"></div>
 			</div>
 		</div>
-		<div class="text-sm font-light w-[150px]">
+		<div class="text-sm font-light w-[165px]">
 			<p class="text-slate-50">{title}</p>
-			<p class="text-xs mb-1">{director}</p>
-			<span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{rating} ⭐️</span>
-			<p>
-				{genres.map((genre: string) => (
-					<span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{genre}</span>
-				))}
+			<p class="text-xs mb-2">{director}</p>
+			<p class="flex justify-between items-center">
+				<span class="font-mono capitalize text-xs rounded bg-zinc-800 py-0.5 px-1">{genres[0]}</span>
+				<span class="font-mono text-xs">{formattedDate}</span>
 			</p>
-			<p>{formattedDate}</p>
 		</div>
 	</a>
 </div>

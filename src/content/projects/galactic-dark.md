@@ -5,7 +5,7 @@ techs: ['VSCode']
 description: 'A theme for VSCode based on my personal preferences.'
 media:
   - '../../assets/images/projects/Galacticdark.png'
-status: 'Completed'
+status: 'Shipped'
 url: 'https://marketplace.visualstudio.com/items?itemName=itsweliton.galactic-dark'
 ---
 

@@ -14,20 +14,6 @@ projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 <Layout title="Work Experience & Projects" pageTitle="My Work Experience & Projects" widthSize="max-w-screen-sm">
   <section class="mb-12">
-    <ul>
-      {workPosts.map((post) => (
-        <WorkExperience
-          title={post.data.title}
-          company={post.data.company}
-          location={post.data.location}
-          startDate={post.data.startDate}
-          endDate={post.data.endDate}
-        />
-      ))}
-    </ul>
-  </section>
-
-  <section>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project) => (
         <Project
@@ -42,4 +28,21 @@ projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
       ))}
     </div>
   </section>
+  <section>
+    <p class="text-sm text-gray-500 font-bold mb-4">
+      Work Experience
+    </p>
+    <ul>
+      {workPosts.map((post) => (
+        <WorkExperience
+          title={post.data.title}
+          company={post.data.company}
+          location={post.data.location}
+          startDate={post.data.startDate}
+          endDate={post.data.endDate}
+        />
+      ))}
+    </ul>
+  </section>
+
 </Layout>

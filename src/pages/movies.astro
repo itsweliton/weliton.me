@@ -4,27 +4,31 @@ import { getCollection } from "astro:content";
 import Movie from './../components/Movie.astro';
 
 const allMovies = await getCollection("movies");
+const featuredMovies = allMovies.filter(movie => movie.data.featured);
+const nonFeaturedMovies = allMovies.filter(movie => !movie.data.featured);
+
 ---
 
 <Layout title="Movies" pageTitle="My Movie Collection" widthSize="max-w-screen-sm">
   <section>
     <div class="flex flex-row flex-wrap justify-center sm:justify-between mb-6">
       {
-        allMovies.slice(0,6).map((movie) => (
-          <div class="sm:w-auto px-2 mb-4 sm:mb-0">
+        featuredMovies.slice(0,6).map((movie) => (
+          <div class="sm:w-auto mb-4 sm:mb-0">
             <Movie {...movie.data} />
           </div>
         ))
       }
     </div>
-    <div class="px-2">
-      {
-      allMovies.slice(3).map((movie) => (
-        <li class="mb-4 flex justify-between items-center text-sm border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
-          <p>{movie.data.title}</p>
-          <span class="font-mono capitalize">{movie.data.director} ~ {new Date(`${movie.data.releaseDate}`).getFullYear()}</span>
+    <ul class="list-none p-0">
+      {nonFeaturedMovies.map((movie) => (
+        <li class="mb-4 border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
+          <a href={`/movies/${movie.slug}`} class="flex justify-between items-center text-sm no-underline text-inherit">
+            <p>{movie.data.title}</p>
+            <span class="font-mono capitalize">{movie.data.director} ~ {new Date(`${movie.data.releaseDate}`).getFullYear()}</span>
+          </a>
         </li>
       ))}
-    </div>
+    </ul>
   </section>
 </Layout>

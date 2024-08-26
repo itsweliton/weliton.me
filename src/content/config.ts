@@ -1,8 +1,8 @@
-import { z, defineCollection } from "astro:content";
+import { z, defineCollection } from 'astro:content';
 
 // Define a `type` and `schema` for each collection
 const postsCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     title: z.string(),
     category: z.string(),
@@ -18,7 +18,7 @@ const postsCollection = defineCollection({
 });
 
 const booksCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     name: z.string(),
     author: z.string(),
@@ -26,12 +26,12 @@ const booksCollection = defineCollection({
     link: z.string(),
     yearRead: z.date().optional(),
     rating: z.string().optional(),
-    status: z.enum(["Read", "Wishlist", "Reading"]),
+    status: z.enum(['Read', 'Wishlist', 'Reading']),
   }),
 });
 
 const albumsCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -46,7 +46,7 @@ const albumsCollection = defineCollection({
 });
 
 const moviesCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -57,11 +57,12 @@ const moviesCollection = defineCollection({
       posterAlt: z.string(),
       genres: z.array(z.string()),
       movieUrl: z.string(),
+      featured: z.boolean().default(false),
     }),
 });
 
 const workCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     title: z.string(),
     startDate: z.date(),
@@ -74,7 +75,7 @@ const workCollection = defineCollection({
 });
 
 const projectsCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -89,7 +90,7 @@ const projectsCollection = defineCollection({
 
 // Create a new content collection for photos
 const photosCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     src: z.string(),
     location: z.string(),

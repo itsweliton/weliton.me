@@ -1,10 +1,11 @@
 ---
-title: "Interstellar"
-releaseDate: 2021-01-01
-director: "Christopher Nolan"
-rating: "PG-13"
-posterUrl: "../../assets/images/albums/damn-dot.jpeg"
-posterAlt: "Interstellar Poster"
-genres: ["Sci-Fi", "Drama"]
-movieUrl: "https://example.com/movie"
+title: 'Zodiac'
+releaseDate: 2007-01-01
+director: 'David Fincher'
+rating: 'PG-13'
+posterUrl: '../../assets/images/movies/zodiac.jpg'
+posterAlt: 'Zodiac Poster'
+genres: ['Drama']
+movieUrl: 'https://www.justwatch.com/ca/movie/zodiac'
+featured: true
 ---
