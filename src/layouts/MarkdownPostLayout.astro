@@ -7,7 +7,7 @@ const publishedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', 
   day: 'numeric',
 })
 ---
-<BaseLayout title={frontmatter.title} pageTitle={frontmatter.title}>
+<BaseLayout title={frontmatter.title} pageTitle={frontmatter.title} widthSize="max-w-screen-sm">
   <div class="text-sm">
     <span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{publishedDate}</span>
     <img src={frontmatter.image.url} alt={frontmatter.image.alt} class="my-4 h-48 w-full object-cover" />

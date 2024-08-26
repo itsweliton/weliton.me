@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Work from "../components/Work.astro";
+import Project from "../components/Project.astro";
+import { ProjectStatus } from '../types/project-status';
+
+const workPosts = await getCollection("work");
+workPosts.sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
+
+const projects = await getCollection("projects");
+projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Work Experience & Projects" pageTitle="My Work Experience & Projects" widthSize="max-w-screen-md">
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Work Experience</h2>
+    <ul>
+      {workPosts.map((post) => (
+        <Work
+          title={post.data.title}
+          company={post.data.company}
+          location={post.data.location}
+          startDate={post.data.startDate}
+          endDate={post.data.endDate}
+        />
+      ))}
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold mb-4">Projects</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <Project
+          title={project.data.title}
+          url={project.data.url}
+          description={project.data.description}
+          techs={project.data.techs}
+          date={project.data.date}
+          status={project.data.status as ProjectStatus}
+          media={project.data.media}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

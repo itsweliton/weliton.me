@@ -1,5 +1,5 @@
-// Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
+
 // Define a `type` and `schema` for each collection
 const postsCollection = defineCollection({
   type: "content",
@@ -60,10 +60,39 @@ const moviesCollection = defineCollection({
     }),
 });
 
+const workCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    startDate: z.date(),
+    endDate: z.date().optional(),
+    company: z.string(),
+    location: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()),
+  }),
+});
+
+const projectsCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      date: z.date(),
+      techs: z.array(z.string()),
+      description: z.string(),
+      media: z.array(image()),
+      status: z.string(),
+      url: z.string(),
+    }),
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   posts: postsCollection,
   books: booksCollection,
   albums: albumsCollection,
   movies: moviesCollection,
+  work: workCollection,
+  projects: projectsCollection,
 };

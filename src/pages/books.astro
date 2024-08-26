@@ -7,21 +7,32 @@ const allBooks = await getCollection("books");
 const statusOrder = {
   Reading: 1,
   Wishlist: 2,
-  Readed: 3,
+  Read: 3,
 };
 const sortedBooks = allBooks.sort((a, b) => {
   return statusOrder[a.data.status] - statusOrder[b.data.status];
 });
 ---
 
-<Layout title="Books" pageTitle="My Bookshelf">
+<Layout title="Books" pageTitle="My Bookshelf" widthSize="max-w-screen-sm">
   <section>
-    <div class="max-w-lg flex flex-row flex-wrap justify-between	">
+    <div class="flex flex-row flex-wrap justify-center sm:justify-between mb-6">
       {
-        sortedBooks.map((book) => (
-          <Book key={book.id} {...book.data} />
+        sortedBooks.slice(0,6).map((book) => (
+          <div class="sm:w-auto px-2 mb-4 sm:mb-0">
+            <Book {...book.data} />
+          </div>
         ))
       }
+    </div>
+    <div>
+      {
+      allBooks.slice(6).map((book) => (
+        <li class="mb-4 flex justify-between items-center text-sm border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
+          <p>{book.data.name}</p>
+          <span class="font-mono capitalize">{book.data.author} ~ {new Date(`${book.data.yearRead}`).getFullYear()}</span>
+        </li>
+      ))}
     </div>
   </section>
 </Layout>

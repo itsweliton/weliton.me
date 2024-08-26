@@ -8,12 +8,14 @@ const allAlbums = await getCollection("albums");
 ---
 
 
-<Layout title="Albums" pageTitle="My Favorite albums">
+<Layout title="Albums" pageTitle="My Album Collection" widthSize="max-w-screen-sm">
   <section>
-    <div class="flex flex-row justify-between mb-6">
+    <div class="flex flex-row flex-wrap justify-center sm:justify-between mb-6">
       {
-        allAlbums.slice(0,3).map((album) => (
-          <Album {...album.data} />
+        allAlbums.slice(0,6).map((album) => (
+          <div class="sm:w-auto px-2 mb-4 sm:mb-0">
+            <Album {...album.data} />
+          </div>
         ))
       }
     </div>

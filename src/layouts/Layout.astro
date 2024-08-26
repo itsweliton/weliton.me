@@ -2,9 +2,10 @@
 interface Props {
 	title: string;
 	pageTitle: string;
+	widthSize: string;
 }
 
-const { title, pageTitle } = Astro.props;
+const { title, pageTitle, widthSize } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,31 +24,41 @@ const { title, pageTitle } = Astro.props;
 
 	</head>
 	<body class="dark-mode bg-gray-900 bg-bullet-journal bg-dots text-gray-100 font-sans">
-		<header class="overflow-auto">
-      <nav class="m-2">
-				<div class="flex flex-col justify-between	space-y-4 md:flex-row md:space-y-0 md:space-x-4"> <!-- Responsive flex classes -->
-					<ul class="flex space-x-4">
-						<li><a href="/" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Home</a></li>
-						<li><a href="/work" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Work</a></li>
-						<li><a href="/books" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Books</a></li>
-						<li><a href="/photos" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Photos</a></li>
-					</ul>
-					<ul class="flex space-x-4">
-						<li><a href="https://twitter.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Twitter</a></li>
-						<li><a href="https://github.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">GitHub</a></li>
-						<li><a href="https://youtube.com" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">YouTube</a></li>
-						<li><a href="https://dribbble.com" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Dribbble</a></li>
-					</ul>
+		<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gray-900/70 overflow-auto">
+			<nav class="mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="py-4">
+					<button id="menu-toggle" class="md:hidden text-gray-100 mb-4">
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+						</svg>
+					</button>
+					<div id="menu" class="hidden md:block">
+						<div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 md:justify-between">
+							<ul class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4">
+								<li><a href="/" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Home</a></li>
+								<li><a href="/work" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Work</a></li>
+								<li><a href="/books" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Books</a></li>
+								<li><a href="/movies" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Movies</a></li>
+								<li><a href="/albums" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Albums</a></li>
+								<li><a href="/photos" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Photos</a></li>
+							</ul>
+							<ul class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4">
+								<li><a href="https://twitter.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Twitter</a></li>
+								<li><a href="https://github.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">GitHub</a></li>
+								<li><a href="https://www.instagram.com/nomadwel/" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Instagram</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
-      </nav>
-    </header>
-		<main class="max-w-screen-sm m-auto mt-20">
+			</nav>
+		</header>
+		<main class={`${widthSize} m-auto mt-32`}>
 			<h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-500 w-fit mb-4">
 				{pageTitle}
 			</h1>
 			<slot />
 		</main>
-		<footer class="text-center py-4 text-xs">
+		<footer class="text-center py-4 text-xs absolute bottom-0 w-full mt-10 relative">
       <p>© 2024 Weliton - All Rights Reserved</p>
     </footer>
 	</body>
@@ -61,8 +72,26 @@ const { title, pageTitle } = Astro.props;
     font-size: 20px;
     line-height: 1.6;
 		height: 100%;
+		position: relative; /* Add this to make absolute positioning work */
+		min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
 	}
 	header {
 		width: 100%;
 	}
 </style>
+
+<script>
+	const menuToggle = document.getElementById('menu-toggle');
+	const menu = document.getElementById('menu');
+
+	menuToggle.addEventListener('click', () => {
+		menu.classList.toggle('hidden');
+	});
+
+	// Close menu when clicking outside
+	document.addEventListener('click', (event) => {
+		if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+			menu.classList.add('hidden');
+		}
+	});
+</script>

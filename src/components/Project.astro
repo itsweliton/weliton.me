@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { ProjectStatus } from '../types/project-status';
+
+interface Props {
+  title: string;
+  url: string;
+  description: string;
+  techs: string[];
+  date: Date;
+  status: ProjectStatus;
+  media?: ImageMetadata[];
+}
+
+const { title, url, description, techs, date, status, media } = Astro.props;
+const projectId = `project-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="overflow-hidden" data-project-id={projectId}>
+  {media && media.length > 1 && (
+    <div class="relative h-48 group mb-4 rounded-lg overflow-hidden">
+      {media.map((mediaItem, mediaIndex) => (
+        <Image
+        src={mediaItem}
+        alt={`${title} - Image ${mediaIndex + 1}`}
+        width={800}
+        height={384}
+        class={`w-full h-48 object-cover absolute top-0 left-0 transition-opacity duration-500 ease-in-out ${mediaIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
+        data-carousel-item
+      />
+    ))}
+    {media.length > 1 && (
+      <>
+        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-carousel-prev>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-carousel-next>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <div id="carousel-indicator" class="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-full text-[10px]">
+          1 / {media.length}
+        </div>
+      </>
+    )}
+  </div>
+  )}
+  <div>
+    <h3 class="font-normal text-base">{url ? (
+      <a href={url} target="_blank" rel="noopener noreferrer" class="hover:underline">
+        {title}
+      </a>
+    ) : (
+      title
+    )}</h3>
+    <p class="text-sm text-gray-400 mb-2">{description}</p>
+    <div class="flex flex-wrap gap-2 mb-2">
+      {techs.map((tech) => (
+        <span class="font-mono text-xs rounded bg-zinc-800 py-0.5 px-1">{tech}</span>
+      ))}
+    </div>
+    <div class="flex justify-between items-center text-sm font-mono">
+      <span>{new Date(date).getFullYear()}</span>
+      {(() => {
+        const statusConfig = {
+          'Completed': { bg: 'bg-green-600', text: 'text-white' },
+          'In Progress': { bg: 'bg-yellow-600', text: 'text-black' },
+          'Planned': { bg: 'bg-blue-600', text: 'text-white' },
+          'Cancelled': { bg: 'bg-gray-600', text: 'text-white' }
+        } as const;
+        const { bg, text } = statusConfig[status];
+        return (
+          <span class={`capitalize text-xs rounded ${bg} ${text} py-0.5 px-1`}>
+            {status}
+          </span>
+        );
+      })()}
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-project-id]').forEach(project => {
+      const images = project.querySelectorAll('[data-carousel-item]');
+
+      if (images.length > 1) {
+        let currentIndex = 0;
+        const indicator = project.querySelector('#carousel-indicator');
+        const prevButton = project.querySelector('[data-carousel-prev]');
+        const nextButton = project.querySelector('[data-carousel-next]');
+
+        function showImage(index) {
+          images[currentIndex].classList.remove('opacity-100');
+          images[currentIndex].classList.add('opacity-0');
+          currentIndex = index;
+          images[currentIndex].classList.remove('opacity-0');
+          images[currentIndex].classList.add('opacity-100');
+          if (indicator) {
+            indicator.textContent = `${currentIndex + 1} / ${images.length}`;
+          }
+        }
+
+        function nextImage() {
+          showImage((currentIndex + 1) % images.length);
+        }
+
+        function prevImage() {
+          showImage((currentIndex - 1 + images.length) % images.length);
+        }
+
+
+        if (prevButton) {
+          prevButton.addEventListener('click', () => {
+            prevImage();
+          });
+        }
+
+        if (nextButton) {
+          nextButton.addEventListener('click', () => {
+            nextImage();
+          });
+        }
+      }
+    });
+  });
+</script>

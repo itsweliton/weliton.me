@@ -1,22 +1,23 @@
 ---
-import Movie from './../components/Movie.astro';
 import Layout from "../layouts/Layout.astro";
-
 import { getCollection } from "astro:content";
+import Movie from './../components/Movie.astro';
 
 const allMovies = await getCollection("movies");
 ---
 
-
-<Layout title="Movies" pageTitle="My Favorite movies">
-    <div class="flex flex-row justify-between mb-6">
+<Layout title="Movies" pageTitle="My Movie Collection" widthSize="max-w-screen-sm">
+  <section>
+    <div class="flex flex-row flex-wrap justify-center sm:justify-between mb-6">
       {
-        allMovies.slice(0,3).map((movie) => (
-          <Movie {...movie.data} />
+        allMovies.slice(0,6).map((movie) => (
+          <div class="sm:w-auto px-2 mb-4 sm:mb-0">
+            <Movie {...movie.data} />
+          </div>
         ))
       }
     </div>
-    <div>
+    <div class="px-2">
       {
       allMovies.slice(3).map((movie) => (
         <li class="mb-4 flex justify-between items-center text-sm border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
@@ -25,4 +26,5 @@ const allMovies = await getCollection("movies");
         </li>
       ))}
     </div>
+  </section>
 </Layout>
