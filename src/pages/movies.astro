@@ -23,7 +23,7 @@ const nonFeaturedMovies = allMovies.filter(movie => !movie.data.featured);
     <ul class="list-none p-0">
       {nonFeaturedMovies.map((movie) => (
         <li class="mb-4 border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
-          <a href={`/movies/${movie.slug}`} class="flex justify-between items-center text-sm no-underline text-inherit">
+          <a href={movie.data.movieUrl} class="flex justify-between items-center text-sm no-underline text-inherit">
             <p>{movie.data.title}</p>
             <span class="font-mono capitalize">{movie.data.director} ~ {new Date(`${movie.data.releaseDate}`).getFullYear()}</span>
           </a>
