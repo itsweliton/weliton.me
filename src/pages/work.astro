@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import Work from "../components/Work.astro";
+import WorkExperience from "../components/Work.astro";
 import Project from "../components/Project.astro";
 import { ProjectStatus } from '../types/project-status';
 
@@ -17,7 +17,7 @@ projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
     <h2 class="text-2xl font-bold mb-4">Work Experience</h2>
     <ul>
       {workPosts.map((post) => (
-        <Work
+        <WorkExperience
           title={post.data.title}
           company={post.data.company}
           location={post.data.location}
