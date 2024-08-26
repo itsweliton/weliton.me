@@ -5,19 +5,26 @@ const formattedDate = new Date(releaseDate).toLocaleDateString('en-US', { month:
 ---
 
 <div class="mb-6">
-  <div class="poster-container animate mb-4 m-2">
-		<div class="poster-bg"></div>
-		<div class="poster-frame">
-			<Image class="image" src={posterUrl} alt={posterAlt} width={150} height={225} />
-			<div class="image-overlay"></div>
+	<a href={movieUrl} target="_blank">
+		<div class="poster-container animate mb-4 m-2">
+			<div class="poster-bg"></div>
+			<div class="poster-frame">
+					<Image class="image" src={posterUrl} alt={posterAlt} width={150} height={225} />
+					<div class="image-overlay"></div>
+			</div>
 		</div>
-	</div>
-	<div class="text-sm font-light w-[150px]">
-    <p class="text-slate-50">{title}</p>
-    <p class="text-xs mb-1">{director}</p>
-    <span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{rating} ⭐️</span>
-    <p>{formattedDate}</p>
-  </div>
+		<div class="text-sm font-light w-[150px]">
+			<p class="text-slate-50">{title}</p>
+			<p class="text-xs mb-1">{director}</p>
+			<span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{rating} ⭐️</span>
+			<p>
+				{genres.map((genre: string) => (
+					<span class="font-mono capitalize text-xs rounded bg-zinc-800	py-0.5 px-1">{genre}</span>
+				))}
+			</p>
+			<p>{formattedDate}</p>
+		</div>
+	</a>
 </div>
 
 

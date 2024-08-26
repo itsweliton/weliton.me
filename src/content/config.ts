@@ -87,6 +87,16 @@ const projectsCollection = defineCollection({
     }),
 });
 
+// Create a new content collection for photos
+const photosCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    src: z.string(),
+    location: z.string(),
+    date: z.date(),
+  }),
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   posts: postsCollection,
@@ -95,4 +105,5 @@ export const collections = {
   movies: moviesCollection,
   work: workCollection,
   projects: projectsCollection,
+  photos: photosCollection,
 };

@@ -1,0 +1,25 @@
+---
+import { type CollectionEntry } from 'astro:content';
+
+interface Props {
+  photos: CollectionEntry<'photos'>[];
+}
+
+const { photos } = Astro.props;
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  {photos.map((photo) => (
+    <div class="relative aspect-square overflow-hidden">
+      <img
+        src={photo.data.src}
+        alt={photo.data.location}
+        class="object-cover w-full h-full"
+      />
+      <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+        <p>{photo.data.location}</p>
+        <p>{photo.data.date.toLocaleDateString()}</p>
+      </div>
+    </div>
+  ))}
+</div>

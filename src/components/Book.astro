@@ -5,7 +5,9 @@ const year = new Date(`${yearRead}`).getFullYear()
 
 <div class="mb-6">
   <div class="book small book-three-d">
-    <img src={cover} alt={`Cover of the book ${name}`} />
+    <a href={link} target="_blank">
+      <img src={cover} alt={`Cover of the book ${name}`} />
+    </a>
   </div>
   <div class="text-sm font-light">
     <p class="text-slate-50">{name}</p>

@@ -6,7 +6,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "../../assets/images/albums/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"]
     }
   }
 }
