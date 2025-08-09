@@ -39,7 +39,7 @@ sortedYears.forEach(year => {
 ---
 
 <Layout title="Books" pageTitle="My Bookshelf" widthSize="max-w-screen-sm">
-  <section>
+  <section class="w-full">
     <!-- Tabs -->
     <div class="flex flex-wrap gap-2 mb-8" id="year-tabs">
       {sortedYears.map((year) => (
@@ -59,9 +59,9 @@ sortedYears.forEach(year => {
         class={`year-content ${year === sortedYears[0] ? 'block' : 'hidden'}`} 
         data-year={year}
       >
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6 w-full justify-items-start">
           {booksByYear[year].map((book) => (
-            <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
+            <div class="w-full max-w-[150px]">
               <Book {...book.data} />
             </div>
           ))}
