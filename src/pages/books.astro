@@ -4,35 +4,119 @@ import { getCollection } from "astro:content";
 import Book from './../components/Book.astro';
 
 const allBooks = await getCollection("books");
-const statusOrder = {
+
+// Group books by year read
+const booksByYear = allBooks.reduce((acc, book) => {
+  const year = book.data.yearRead ? new Date(book.data.yearRead).getFullYear() : 'No Year';
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(book);
+  return acc;
+}, {} as Record<string, typeof allBooks>);
+
+// Sort years in descending order (newest first)
+const sortedYears = Object.keys(booksByYear).sort((a, b) => {
+  if (a === 'No Year') return 1;
+  if (b === 'No Year') return -1;
+  return parseInt(b) - parseInt(a);
+});
+
+// Sort books within each year by status
+const statusOrder: Record<string, number> = {
   Reading: 1,
   Wishlist: 2,
   Read: 3,
 };
-const sortedBooks = allBooks.sort((a, b) => {
-  return statusOrder[a.data.status] - statusOrder[b.data.status];
+
+sortedYears.forEach(year => {
+  booksByYear[year].sort((a, b) => {
+    const statusA = a.data.status as keyof typeof statusOrder;
+    const statusB = b.data.status as keyof typeof statusOrder;
+    return statusOrder[statusA] - statusOrder[statusB];
+  });
 });
 ---
 
 <Layout title="Books" pageTitle="My Bookshelf" widthSize="max-w-screen-sm">
   <section>
-    <div class="flex flex-row flex-wrap justify-center sm:justify-between mb-6">
-      {
-        sortedBooks.slice(0,6).map((book) => (
-          <div class="sm:w-auto px-2 mb-4 sm:mb-0">
-            <Book {...book.data} />
-          </div>
-        ))
-      }
-    </div>
-    <div>
-      {
-      allBooks.slice(6).map((book) => (
-        <li class="mb-4 flex justify-between items-center text-sm border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
-          <p>{book.data.name}</p>
-          <span class="font-mono capitalize">{book.data.author} ~ {new Date(`${book.data.yearRead}`).getFullYear()}</span>
-        </li>
+    <!-- Tabs -->
+    <div class="flex flex-wrap gap-2 mb-8" id="year-tabs">
+      {sortedYears.map((year) => (
+        <button
+          class="year-tab font-mono text-xs rounded bg-zinc-800 py-2 px-3 transition-all duration-200 ease-in-out hover:bg-zinc-700 relative shadow-md border border-white/10 hover:shadow-lg active:translate-y-0.5"
+          data-year={year}
+          data-active={year === sortedYears[0] ? 'true' : 'false'}
+        >
+          {year}
+        </button>
       ))}
     </div>
+
+    <!-- Books by year -->
+    {sortedYears.map((year) => (
+      <div 
+        class={`year-content ${year === sortedYears[0] ? 'block' : 'hidden'}`} 
+        data-year={year}
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+          {booksByYear[year].map((book) => (
+            <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
+              <Book {...book.data} />
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
   </section>
 </Layout>
+
+<style>
+  .year-tab[data-active="true"] {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    box-shadow: 
+      inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.05),
+      0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .year-tab:active:not([data-active="true"]) {
+    box-shadow: 
+      inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.05);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.year-tab');
+    const contents = document.querySelectorAll('.year-content');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', (event) => {
+        const target = event.target as HTMLButtonElement;
+        const year = target.getAttribute('data-year');
+        
+        // Update active tab
+        tabs.forEach((t) => {
+          t.setAttribute('data-active', 'false');
+        });
+        target.setAttribute('data-active', 'true');
+        
+        // Show corresponding content
+        contents.forEach((content) => {
+          const contentElement = content as HTMLElement;
+          if (contentElement.getAttribute('data-year') === year) {
+            contentElement.classList.remove('hidden');
+            contentElement.classList.add('block');
+          } else {
+            contentElement.classList.remove('block');
+            contentElement.classList.add('hidden');
+          }
+        });
+      });
+    });
+  });
+</script>

@@ -1,0 +1,20 @@
+---
+const { title, releaseDate, artist, rating, coverUrl } = Astro.props;
+import Vinyl from '../components/Vinyl.astro';
+const formattedDate = new Date(releaseDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+
+<div>
+  <Vinyl coverUrl={coverUrl} coverAlt={`${title} by ${artist}`} />
+  <div class="text-sm font-light w-[150px]">
+    <p class="text-slate-50">{title}</p>
+    <p class="text-xs mb-1">{artist}</p>
+    {rating && <span class="font-mono capitalize text-xs rounded bg-zinc-800 py-0.5 px-1">{rating} ⭐️</span>}
+    <p>{formattedDate}</p>
+  </div>
+</div>
+
+
+<style>
+
+</style>

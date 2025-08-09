@@ -1,38 +1,39 @@
 ---
+import Song from './../components/Song.astro';
 import Layout from "../layouts/Layout.astro";
+
 import { getCollection } from "astro:content";
-import Movie from './../components/Movie.astro';
 
-const allMovies = await getCollection("movies");
+const allSongs = await getCollection("songs");
 
-// Group movies by year watched
-const moviesByYear = allMovies.reduce((acc, movie) => {
-  const year = movie.data.watchDate ? new Date(movie.data.watchDate).getFullYear() : 'No Year';
+// Group songs by year listened
+const songsByYear = allSongs.reduce((acc, song) => {
+  const year = song.data.listenDate ? new Date(song.data.listenDate).getFullYear() : 'No Year';
   if (!acc[year]) {
     acc[year] = [];
   }
-  acc[year].push(movie);
+  acc[year].push(song);
   return acc;
-}, {} as Record<string, typeof allMovies>);
+}, {} as Record<string, typeof allSongs>);
 
 // Sort years in descending order (newest first)
-const sortedYears = Object.keys(moviesByYear).sort((a, b) => {
+const sortedYears = Object.keys(songsByYear).sort((a, b) => {
   if (a === 'No Year') return 1;
   if (b === 'No Year') return -1;
   return parseInt(b) - parseInt(a);
 });
 
-// Sort movies within each year by watch date (newest first)
+// Sort songs within each year by listen date (newest first)
 sortedYears.forEach(year => {
-  moviesByYear[year].sort((a, b) => {
-    const aWatchDate = a.data.watchDate ? new Date(a.data.watchDate).getTime() : 0;
-    const bWatchDate = b.data.watchDate ? new Date(b.data.watchDate).getTime() : 0;
-    return bWatchDate - aWatchDate;
+  songsByYear[year].sort((a, b) => {
+    const aListenDate = a.data.listenDate ? new Date(a.data.listenDate).getTime() : 0;
+    const bListenDate = b.data.listenDate ? new Date(b.data.listenDate).getTime() : 0;
+    return bListenDate - aListenDate;
   });
 });
 ---
 
-<Layout title="Movies" pageTitle="My Movie Collection" widthSize="max-w-screen-sm">
+<Layout title="Songs" pageTitle="My Song Collection" widthSize="max-w-screen-sm">
   <section>
     <!-- Tabs -->
     <div class="flex flex-wrap gap-2 mb-8" id="year-tabs">
@@ -47,42 +48,72 @@ sortedYears.forEach(year => {
       ))}
     </div>
 
-    <!-- Movies by year -->
+    <!-- Songs by year -->
     {sortedYears.map((year) => (
       <div 
         class={`year-content ${year === sortedYears[0] ? 'block' : 'hidden'}`} 
         data-year={year}
       >
-        {year === '2025' ? (
+        {year === 'No Year' ? (
           <>
-            {moviesByYear[year].filter(movie => movie.data.featured).slice(0, 6).length > 0 && (
+            <!-- Featured songs as cards (max 6) -->
+            {songsByYear[year].filter(song => song.data.featured).slice(0, 6).length > 0 && (
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
-                {moviesByYear[year].filter(movie => movie.data.featured).slice(0, 6).map((movie) => (
+                {songsByYear[year].filter(song => song.data.featured).slice(0, 6).map((song) => (
                   <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
-                    <Movie {...movie.data} />
+                    <Song {...song.data} />
                   </div>
                 ))}
               </div>
             )}
-
-            {moviesByYear[year].filter(movie => !movie.data.featured).length > 0 && (
+            
+            <!-- Non-featured songs as list -->
+            {songsByYear[year].filter(song => !song.data.featured).length > 0 && (
               <ul class="list-none p-0">
-                {moviesByYear[year].filter(movie => !movie.data.featured).map((movie) => (
+                {songsByYear[year].filter(song => !song.data.featured).map((song) => (
                   <li class="mb-4 border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
-                    <a href={movie.data.movieUrl} class="flex justify-between items-center text-sm no-underline text-inherit">
-                      <p>{movie.data.title}</p>
-                      <span class="font-mono capitalize">{movie.data.director} ~ {new Date(`${movie.data.releaseDate}`).getFullYear()}</span>
-                    </a>
+                    <div class="flex justify-between items-center text-sm">
+                      <p>{song.data.title}</p>
+                      <span class="font-mono capitalize">{song.data.artist} ~ {new Date(`${song.data.releaseDate}`).getFullYear()}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        ) : year === '2025' ? (
+          <>
+            <!-- Featured songs as cards (max 6) for 2025 -->
+            {songsByYear[year].filter(song => song.data.featured).slice(0, 6).length > 0 && (
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+                {songsByYear[year].filter(song => song.data.featured).slice(0, 6).map((song) => (
+                  <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
+                    <Song {...song.data} />
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            <!-- Non-featured songs as list for 2025 -->
+            {songsByYear[year].filter(song => !song.data.featured).length > 0 && (
+              <ul class="list-none p-0">
+                {songsByYear[year].filter(song => !song.data.featured).map((song) => (
+                  <li class="mb-4 border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
+                    <div class="flex justify-between items-center text-sm">
+                      <p>{song.data.title}</p>
+                      <span class="font-mono capitalize">{song.data.artist} ~ {new Date(`${song.data.releaseDate}`).getFullYear()}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
             )}
           </>
         ) : (
+          <!-- All songs as cards for other years -->
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
-            {moviesByYear[year].map((movie) => (
+            {songsByYear[year].map((song) => (
               <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
-                <Movie {...movie.data} />
+                <Song {...song.data} />
               </div>
             ))}
           </div>

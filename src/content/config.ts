@@ -30,7 +30,7 @@ const booksCollection = defineCollection({
   }),
 });
 
-const albumsCollection = defineCollection({
+const songsCollection = defineCollection({
   type: 'content',
   schema: ({ image }) =>
     z.object({
@@ -39,9 +39,8 @@ const albumsCollection = defineCollection({
       artist: z.string(),
       rating: z.string().optional(),
       coverUrl: image(),
-      coverAlt: z.string(),
-      favSong: z.string(),
-      albumUrl: z.string(),
+      listenDate: z.date().optional(),
+      featured: z.boolean().default(false),
     }),
 });
 
@@ -58,6 +57,7 @@ const moviesCollection = defineCollection({
       genres: z.array(z.string()),
       movieUrl: z.string(),
       featured: z.boolean().default(false),
+      watchDate: z.date().optional(),
     }),
 });
 
@@ -98,11 +98,10 @@ const photosCollection = defineCollection({
   }),
 });
 
-// Export a single `collections` object to register your collection(s)
 export const collections = {
   posts: postsCollection,
   books: booksCollection,
-  albums: albumsCollection,
+  songs: songsCollection,
   movies: moviesCollection,
   work: workCollection,
   projects: projectsCollection,

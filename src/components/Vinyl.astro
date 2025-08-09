@@ -8,7 +8,7 @@ const optimizedBackground = await getImage({src: coverUrl, format: 'webp'});
 <div class="mb-6">
   <div class="album" data-cover-url={coverUrl}>
 		<div class="cover">
-			<Image class="image" src={coverUrl} alt={coverAlt} width={150} height={150}/>
+			<Image class="image" src={coverUrl} alt={coverAlt || "Song cover"} width={150} height={150}/>
 		</div>
 		<div class="vinyl">
 			<div class="vinyl-cover" style={`background-image: url(${optimizedBackground.src});`}></div>
