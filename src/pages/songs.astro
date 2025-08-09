@@ -58,7 +58,7 @@ sortedYears.forEach(year => {
           <>
             <!-- Featured songs as cards (max 6) -->
             {songsByYear[year].filter(song => song.data.featured).slice(0, 6).length > 0 && (
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-6">
                 {songsByYear[year].filter(song => song.data.featured).slice(0, 6).map((song) => (
                   <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
                     <Song {...song.data} />
@@ -85,7 +85,7 @@ sortedYears.forEach(year => {
           <>
             <!-- Featured songs as cards (max 6) for 2025 -->
             {songsByYear[year].filter(song => song.data.featured).slice(0, 6).length > 0 && (
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-6">
                 {songsByYear[year].filter(song => song.data.featured).slice(0, 6).map((song) => (
                   <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
                     <Song {...song.data} />
@@ -110,7 +110,7 @@ sortedYears.forEach(year => {
           </>
         ) : (
           <!-- All songs as cards for other years -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-6">
             {songsByYear[year].map((song) => (
               <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
                 <Song {...song.data} />

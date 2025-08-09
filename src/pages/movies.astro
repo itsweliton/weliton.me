@@ -56,7 +56,7 @@ sortedYears.forEach(year => {
         {year === '2025' ? (
           <>
             {moviesByYear[year].filter(movie => movie.data.featured).slice(0, 6).length > 0 && (
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-6">
                 {moviesByYear[year].filter(movie => movie.data.featured).slice(0, 6).map((movie) => (
                   <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
                     <Movie {...movie.data} />
@@ -79,7 +79,7 @@ sortedYears.forEach(year => {
             )}
           </>
         ) : (
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-6">
             {moviesByYear[year].map((movie) => (
               <div class="flex justify-center sm:justify-start w-full max-w-[150px] mx-auto sm:mx-0">
                 <Movie {...movie.data} />
