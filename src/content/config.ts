@@ -98,6 +98,18 @@ const photosCollection = defineCollection({
   }),
 });
 
+// Create a new content collection for weekly posts
+const weeklyCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    url: z.string(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 export const collections = {
   posts: postsCollection,
   books: booksCollection,
@@ -106,4 +118,5 @@ export const collections = {
   work: workCollection,
   projects: projectsCollection,
   photos: photosCollection,
+  weekly: weeklyCollection,
 };

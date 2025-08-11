@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Weekly from "../components/Weekly.astro";
+
+const weeklyPosts = await getCollection("weekly");
+weeklyPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Weekly Notes" pageTitle="Weekly Notes" widthSize="max-w-screen-sm">
+  <section>
+    <!-- <p class="text-sm text-gray-500 font-bold mb-4">
+      Weekly Posts
+    </p> -->
+    <ul>
+      {weeklyPosts.map((post) => (
+        <Weekly
+          title={post.data.title}
+          date={post.data.date}
+          url={post.data.url}
+          description={post.data.description}
+        />
+      ))}
+    </ul>
+  </section>
+</Layout>
