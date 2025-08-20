@@ -23,7 +23,10 @@ const { title, pageTitle, widthSize } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
 	</head>
-	<body class="dark-mode bg-gray-900 bg-bullet-journal bg-dots text-gray-100 font-sans">
+	<body class="dark-mode bg-gray-900 text-gray-100 font-sans">
+		<!-- Interactive Background Canvas -->
+		<canvas id="background-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+		
 		<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gray-900/70 overflow-auto">
 			<nav class="mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="py-4">
@@ -52,13 +55,13 @@ const { title, pageTitle, widthSize } = Astro.props;
 				</div>
 			</nav>
 		</header>
-		<main class={`${widthSize} m-auto mt-32`}>
+		<main class={`${widthSize} m-auto mt-32 relative z-10`}>
 			<h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-500 w-fit mb-4">
 				{pageTitle}
 			</h1>
 			<slot />
 		</main>
-		<footer class="text-center py-4 text-xs absolute bottom-0 w-full mt-10 relative">
+		<footer class="text-center py-4 text-xs absolute bottom-0 w-full mt-10 relative z-10">
       <p>© 2014-2025 Weliton Soranzo. All Rights Reserved.</p>
 			weliton.me . <span class="text-xs">v.2025.08</span>
     </footer>
@@ -73,15 +76,20 @@ const { title, pageTitle, widthSize } = Astro.props;
     font-size: 20px;
     line-height: 1.6;
 		height: 100%;
-		position: relative; /* Add this to make absolute positioning work */
-		min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+		position: relative;
+		min-height: 100vh;
 	}
 	header {
 		width: 100%;
 	}
+	
+	#background-canvas {
+		opacity: 0.3;
+	}
 </style>
 
 <script is:inline>
+	// Menu functionality
 	const menuToggle = document.getElementById('menu-toggle');
 	const menu = document.getElementById('menu');
 
@@ -94,5 +102,266 @@ const { title, pageTitle, widthSize } = Astro.props;
 		if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
 			menu.classList.add('hidden');
 		}
+	});
+
+	// Interactive Background System
+	class InteractiveBackground {
+		constructor() {
+			this.canvas = document.getElementById('background-canvas');
+			this.ctx = this.canvas.getContext('2d');
+			this.dots = [];
+			this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; // Initialize to center
+			this.animationId = null;
+			this.isMouseActive = false; // Track if mouse has been active
+			this.isBlackHoleActive = false; // Track if black hole is active
+			this.glowOpacity = 0; // Track glow opacity for fade effect
+			
+			this.init();
+		}
+
+		init() {
+			this.resizeCanvas();
+			this.createDots();
+			this.bindEvents();
+			this.animate();
+		}
+
+		resizeCanvas() {
+			this.canvas.width = window.innerWidth;
+			this.canvas.height = window.innerHeight;
+		}
+
+		createDots() {
+			const spacing = 32; // Double the spacing from 16 to 32 (half the dots)
+			const cols = Math.ceil(this.canvas.width / spacing);
+			const rows = Math.ceil(this.canvas.height / spacing);
+
+			for (let i = 0; i < cols; i++) {
+				for (let j = 0; j < rows; j++) {
+					this.dots.push({
+						x: i * spacing + spacing / 2,
+						y: j * spacing + spacing / 2,
+						originalX: i * spacing + spacing / 2,
+						originalY: j * spacing + spacing / 2,
+						vx: 0,
+						vy: 0,
+						mass: 1
+					});
+				}
+			}
+		}
+
+		bindEvents() {
+			window.addEventListener('resize', () => this.resizeCanvas());
+			
+			// Track mouse movement
+			document.addEventListener('mousemove', (e) => {
+				this.mouse.x = e.clientX;
+				this.mouse.y = e.clientY;
+				this.isMouseActive = true;
+			});
+
+			// Track touch movement for mobile
+			document.addEventListener('touchmove', (e) => {
+				e.preventDefault();
+				const touch = e.touches[0];
+				this.mouse.x = touch.clientX;
+				this.mouse.y = touch.clientY;
+				this.isMouseActive = true;
+			});
+
+			// Add mouse enter/leave events
+			document.addEventListener('mouseenter', () => {
+				this.isMouseActive = true;
+			});
+
+			document.addEventListener('mouseleave', () => {
+				this.isMouseActive = false;
+			});
+
+			// Add click event to toggle black hole on/off
+			document.addEventListener('click', () => {
+				this.isBlackHoleActive = !this.isBlackHoleActive; // Toggle on/off
+			});
+
+			// Add key event to deactivate black hole (ESC key)
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+					this.isBlackHoleActive = false;
+				}
+			});
+		}
+
+		updateDots() {
+			const gravityStrength = 30; // Back to 1.5 for proper orbital attraction
+			const maxDistance = 300; // Extended area of effect
+			const damping = 0.40; // Back to 0.98 for slower movement
+			const springStrength = 0.08; // Reduced spring strength from 0.15 to 0.08 (gentler return)
+			const blackHoleRadius = 12.5; // Visual black hole size
+			const orbitalRadius = 30; // Area where dots actually orbit
+
+			// Fade glow opacity smoothly
+			if (this.isBlackHoleActive) {
+				this.glowOpacity = Math.min(1, this.glowOpacity + 0.05); // Fade in
+			} else {
+				this.glowOpacity = Math.max(0, this.glowOpacity - 0.05); // Fade out
+			}
+
+			this.dots.forEach(dot => {
+				// Only apply black hole effect if black hole is active AND mouse has been active AND glow is visible
+				if (this.isBlackHoleActive && this.isMouseActive && this.glowOpacity > 0.1) {
+					// Vector from dot to mouse (black hole center)
+					const dx = this.mouse.x - dot.x;
+					const dy = this.mouse.y - dot.y;
+					const distance = Math.sqrt(dx * dx + dy * dy);
+
+					// Apply gravitational attraction to ALL dots within radius
+					if (distance < maxDistance) {
+						// Calculate distance from orbital area edge (not black hole center)
+						const distanceFromOrbit = Math.max(0, distance - orbitalRadius);
+						
+						// Stronger force for dots closer to the orbital area
+						const force = gravityStrength / (distanceFromOrbit + 1); // +1 to avoid division by zero
+						
+						// Calculate perpendicular force for orbital motion
+						// Instead of pulling directly toward center, create tangential velocity
+						const angle = Math.atan2(dy, dx);
+						const perpendicularAngle = angle + Math.PI / 2; // 90 degrees perpendicular
+						
+						// Apply force perpendicular to the radial direction (creates orbit)
+						dot.vx += Math.cos(perpendicularAngle) * force;
+						dot.vy += Math.sin(perpendicularAngle) * force;
+						
+						// Add slight radial attraction to keep particles in orbit
+						const radialForce = force * 0.3; // Weaker radial component
+						dot.vx += (dx / distance) * radialForce;
+						dot.vy += (dy / distance) * radialForce;
+					}
+				}
+
+				// Spring force to return to grid position
+				const springDx = dot.originalX - dot.x;
+				const springDy = dot.originalY - dot.y;
+				dot.vx += springDx * springStrength;
+				dot.vy += springDy * springStrength;
+
+				// Apply damping
+				dot.vx *= damping;
+				dot.vy *= damping;
+
+				// Update position
+				dot.x += dot.vx;
+				dot.y += dot.vy;
+			});
+		}
+
+		drawDots() {
+			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+			
+			// Draw dots with fade effect based on black hole state
+			this.dots.forEach(dot => {
+				if (this.isBlackHoleActive && this.glowOpacity > 0) {
+					// Active state: bright white core with blue glow (faded in)
+					// Outer blue glow
+					this.ctx.fillStyle = '#3B82F6'; // blue-500
+					this.ctx.globalAlpha = 0.2 * this.glowOpacity;
+					this.ctx.beginPath();
+					this.ctx.arc(dot.x, dot.y, 4, 0, Math.PI * 2);
+					this.ctx.fill();
+					
+					// Middle blue glow
+					this.ctx.fillStyle = '#60A5FA'; // blue-400
+					this.ctx.globalAlpha = 0.3 * this.glowOpacity;
+					this.ctx.beginPath();
+					this.ctx.arc(dot.x, dot.y, 2.5, 0, Math.PI * 2);
+					this.ctx.fill();
+					
+					// Bright white core
+					this.ctx.fillStyle = '#FFFFFF'; // pure white
+					this.ctx.globalAlpha = 0.9 * this.glowOpacity;
+					this.ctx.beginPath();
+					this.ctx.arc(dot.x, dot.y, 1, 0, Math.PI * 2);
+					this.ctx.fill();
+				} else {
+					// Inactive state: no glow, just simple dots
+					this.ctx.fillStyle = '#6B7280'; // medium gray
+					this.ctx.globalAlpha = 0.6;
+					this.ctx.beginPath();
+					this.ctx.arc(dot.x, dot.y, 1, 0, Math.PI * 2);
+					this.ctx.fill();
+				}
+			});
+
+			// Draw black hole visualization only when active and faded in
+			if (this.isBlackHoleActive && this.isMouseActive && this.glowOpacity > 0) {
+				// Create realistic event horizon glow effect based on actual black hole images
+				
+				// Outer accretion disk glow (orange-red, like real black holes)
+				const gradient1 = this.ctx.createRadialGradient(
+					this.mouse.x, this.mouse.y, 12.5,
+					this.mouse.x, this.mouse.y, 25
+				);
+				gradient1.addColorStop(0, `rgba(255, 69, 0, ${0.1 * this.glowOpacity})`); // Orange-red
+				gradient1.addColorStop(0.5, `rgba(255, 140, 0, ${0.05 * this.glowOpacity})`); // Dark orange
+				gradient1.addColorStop(1, 'rgba(255, 69, 0, 0)'); // Transparent
+				
+				this.ctx.fillStyle = gradient1;
+				this.ctx.beginPath();
+				this.ctx.arc(this.mouse.x, this.mouse.y, 25, 0, Math.PI * 2);
+				this.ctx.fill();
+				
+				// Middle accretion disk (brighter orange)
+				const gradient2 = this.ctx.createRadialGradient(
+					this.mouse.x, this.mouse.y, 12.5,
+					this.mouse.x, this.mouse.y, 20
+				);
+				gradient2.addColorStop(0, `rgba(255, 150, 10, ${0.2 * this.glowOpacity})`); // Brighter orange
+				gradient2.addColorStop(0.7, `rgba(255, 140, 0, ${0.1 * this.glowOpacity})`); // Medium orange
+				gradient2.addColorStop(1, 'rgba(255, 69, 0, 0)'); // Transparent
+				
+				this.ctx.fillStyle = gradient2;
+				this.ctx.beginPath();
+				this.ctx.arc(this.mouse.x, this.mouse.y, 20, 0, Math.PI * 2);
+				this.ctx.fill();
+				
+				// Inner event horizon glow (bright orange)
+				const gradient3 = this.ctx.createRadialGradient(
+					this.mouse.x, this.mouse.y, 12.5,
+					this.mouse.x, this.mouse.y, 18
+				);
+				gradient3.addColorStop(0, `rgba(255, 69, 0, ${0.4 * this.glowOpacity})`); // Bright orange
+				gradient3.addColorStop(0.8, `rgba(255, 140, 0, ${0.2 * this.glowOpacity})`); // Medium orange
+				gradient3.addColorStop(1, 'rgba(255, 69, 0, 0)'); // Transparent
+				
+				this.ctx.fillStyle = gradient3;
+				this.ctx.beginPath();
+				this.ctx.arc(this.mouse.x, this.mouse.y, 18, 0, Math.PI * 2);
+				this.ctx.fill();
+				
+				// Pure black event horizon (the actual black hole)
+				this.ctx.fillStyle = '#000000';
+				this.ctx.globalAlpha = this.glowOpacity;
+				this.ctx.beginPath();
+				this.ctx.arc(this.mouse.x, this.mouse.y, 12.5, 0, Math.PI * 2);
+				this.ctx.fill();
+			}
+		}
+
+		animate() {
+			this.updateDots();
+			this.drawDots();
+			this.animationId = requestAnimationFrame(() => this.animate());
+		}
+
+		destroy() {
+			if (this.animationId) {
+				cancelAnimationFrame(this.animationId);
+			}
+		}
+	}
+
+	// Initialize the interactive background when the page loads
+	document.addEventListener('DOMContentLoaded', () => {
+		new InteractiveBackground();
 	});
 </script>
