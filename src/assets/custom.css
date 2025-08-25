@@ -1,5 +1,3 @@
-
-
 /* Slick Page Transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -23,6 +21,7 @@
 	from { opacity: 0; }
 	to { opacity: 1; }
 }
+
 /* Custom Apple Garamond Font Declarations - Simplified */
 @font-face {
 	font-family: 'AppleGaramondLight';
@@ -71,15 +70,16 @@ body, h1, h2, h3, h4, h5, h6, p, span, div, a, li, button {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-/* Regular paragraph text styling */
-p {
+/* Regular paragraph text styling - only for general content, not components */
+.post-content p,
+.prose p,
+main > section p:not([class]) {
 	color: color(display-p3 0.933 0.933 0.933);
 	font-size: 0.875rem; /* text-sm equivalent */
 	line-height: 1.625; /* leading-relaxed equivalent */
 }
 
 /* Post content styling */
-.post-content p,
 .post-content li,
 .post-content div,
 .post-content span {
@@ -89,7 +89,6 @@ p {
 }
 
 /* Markdown content styling */
-.prose p,
 .prose li,
 .prose div,
 .prose span {
@@ -110,36 +109,10 @@ p {
 	background-color: oklch(16.8% 0 0);
 }
 
-/* Default gradient for all links */
-a {
-	background: linear-gradient(to right, #86efac, #3b82f6);
-	-webkit-background-clip: text;
-	background-clip: text;
-	text-decoration: none;
-	transition: opacity 0.2s ease-in-out;
-}
-
-a:hover {
-	opacity: 0.8;
-}
-
-/* Override for navigation links only */
+/* Navigation links color */
 header a,
 nav a {
-	background: none;
-	-webkit-background-clip: initial;
-	background-clip: initial;
-	-webkit-text-fill-color: initial;
-	color: inherit;
-}
-
-/* Override for list item links (like weekly notes) */
-li a {
-	background: none;
-	-webkit-background-clip: initial;
-	background-clip: initial;
-	-webkit-text-fill-color: initial;
-	color: inherit;
+	color: color(display-p3 0.706 0.706 0.706);
 }
 
 /* Essential layout styles */

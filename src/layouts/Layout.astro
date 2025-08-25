@@ -1,4 +1,7 @@
 ---
+import '../assets/custom.css';
+import { ClientRouter } from "astro:transitions";
+
 interface Props {
 	title: string;
 	pageTitle: string;
@@ -17,8 +20,6 @@ const { title, pageTitle, widthSize } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<!-- Custom CSS - Load before Tailwind to ensure proper precedence -->
-		<link rel="stylesheet" href="/assets/custom.css">
 		<!-- Include Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,11 +28,12 @@ const { title, pageTitle, widthSize } = Astro.props;
 		<!-- <link rel="preload" href="/assets/fonts/AppleGaramondWebfonts/AppleGaramond.woff2" as="font" type="font/woff2" crossorigin> -->
 		<link rel="preload" href="/assets/fonts/AppleGaramondWebfonts/AppleGaramond-Light.woff2" as="font" type="font/woff2" crossorigin>
 		<!-- <link rel="preload" href="/assets/fonts/AppleGaramondWebfonts/AppleGaramond-Bold.woff2" as="font" type="font/woff2" crossorigin> -->
+		<ClientRouter />
 
 	</head>
 	<body class="dark-mode bg-oklch-16-8 text-gray-100 font-sans">
 		<!-- Interactive Background Canvas - Always visible, but effects vary by page -->
-		<canvas id="background-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+		<canvas id="background-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0" style="opacity: 1;"></canvas>
 
 		<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-oklch-16-8/70 overflow-auto">
 			<nav class="mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,21 +94,6 @@ const { title, pageTitle, widthSize } = Astro.props;
 		}
 	});
 
-	// Enable View Transitions API for slick page transitions
-	if (document.startViewTransition) {
-		// Intercept all navigation clicks
-		document.addEventListener('click', (e) => {
-			const link = e.target.closest('a');
-			if (link && link.href && link.href.startsWith(window.location.origin) && !link.target && !e.ctrlKey && !e.metaKey) {
-				e.preventDefault();
-				
-				document.startViewTransition(() => {
-					window.location.href = link.href;
-				});
-			}
-		});
-	}
-
 	// Interactive Background System - Always show dots, but effects vary by page
 	class InteractiveBackground {
 		constructor() {
@@ -114,6 +101,8 @@ const { title, pageTitle, widthSize } = Astro.props;
 			if (!this.canvas) return; // Exit if no canvas
 			
 			this.ctx = this.canvas.getContext('2d');
+			if (!this.ctx) return; // Exit if no context
+			
 			this.dots = [];
 			this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; // Initialize to center
 			this.animationId = null;
@@ -138,7 +127,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 		}
 
 		createDots() {
-			const spacing = 32; // Double the spacing from 16 to 32 (half the dots)
+			const spacing = 32; // Back to original spacing
 			const cols = Math.ceil(this.canvas.width / spacing);
 			const rows = Math.ceil(this.canvas.height / spacing);
 
@@ -159,7 +148,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 
 		bindEvents() {
 			window.addEventListener('resize', () => this.resizeCanvas());
-			
+
 			// Track mouse movement
 			document.addEventListener('mousemove', (e) => {
 				this.mouse.x = e.clientX;
@@ -304,10 +293,10 @@ const { title, pageTitle, widthSize } = Astro.props;
 		drawDots() {
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			
-			// Draw dots with fade effect based on black hole state
+			// Always draw dots - they should be visible on all pages
 			this.dots.forEach(dot => {
 				if (this.showEffects && this.isBlackHoleActive && this.glowOpacity > 0) {
-					// Active state: bright white core with blue glow (faded in)
+					// Active state: bright white core with blue glow (faded in) - INDEX PAGE ONLY
 					// Outer blue glow
 					this.ctx.fillStyle = '#3B82F6'; // blue-500
 					this.ctx.globalAlpha = 0.2 * this.glowOpacity;
@@ -329,11 +318,11 @@ const { title, pageTitle, widthSize } = Astro.props;
 					this.ctx.arc(dot.x, dot.y, 1, 0, Math.PI * 2);
 					this.ctx.fill();
 				} else {
-					// Inactive state: no glow, just simple dots
-					this.ctx.fillStyle = '#6B7280'; // medium gray
-					this.ctx.globalAlpha = 0.6;
+					// Inactive state: simple dots - ALL PAGES
+					this.ctx.fillStyle = 'rgb(238, 238, 238)'; // Light gray like in the image
+					this.ctx.globalAlpha = 0.1; // Subtle opacity for the minimalist look
 					this.ctx.beginPath();
-					this.ctx.arc(dot.x, dot.y, 1, 0, Math.PI * 2);
+					this.ctx.arc(dot.x, dot.y, 1, 0, Math.PI * 2); // Small size for subtle effect
 					this.ctx.fill();
 				}
 			});
@@ -408,13 +397,33 @@ const { title, pageTitle, widthSize } = Astro.props;
 
 	// Initialize the interactive background when the page loads
 	document.addEventListener('DOMContentLoaded', () => {
+		initBackground();
+	});
+
+	// Also initialize when navigating with view transitions
+	if (document.startViewTransition) {
+		document.addEventListener('astro:page-load', () => {
+			initBackground();
+		});
+	}
+
+	function initBackground() {
+		// Clean up any existing background
+		if (window.currentBackground) {
+			window.currentBackground.destroy();
+		}
+		
 		const background = new InteractiveBackground();
+		window.currentBackground = background;
 		
 		// Check if this page should show effects (index page)
 		// We'll check for a data attribute or specific page content
-		const isIndexPage = document.querySelector('main h1')?.textContent?.includes('Hey! It\'s Weliton');
+		const h1Element = document.querySelector('main h1');
+		const h1Text = h1Element?.textContent || '';
+		const isIndexPage = h1Text.includes('Hey') && h1Text.includes('Weliton');
+		
 		if (isIndexPage) {
 			background.showEffects = true;
 		}
-	});
+	}
 </script>
