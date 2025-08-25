@@ -49,6 +49,8 @@ const { title, pageTitle, widthSize } = Astro.props;
 							<ul class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4">
 								<li><a href="https://github.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">GitHub</a></li>
 								<li><a href="https://www.instagram.com/welframes/" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Instagram</a></li>
+								<li><a href="https://www.linkedin.com/in/itsweliton/" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">LinkedIn</a></li>
+								<li><a href="mailto:welitonderesende@gmail.com" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Email</a></li>
 							</ul>
 						</div>
 					</div>
@@ -180,8 +182,33 @@ const { title, pageTitle, widthSize } = Astro.props;
 			});
 
 			// Add click event to toggle black hole on/off
-			document.addEventListener('click', () => {
-				this.isBlackHoleActive = !this.isBlackHoleActive; // Toggle on/off
+			document.addEventListener('click', (e) => {
+				// Only trigger animation if clicking on clean background
+				// Check if the clicked element is an interactive element
+				const target = e.target;
+				const isInteractive = target.tagName === 'A' || 
+					target.tagName === 'BUTTON' || 
+					target.tagName === 'INPUT' || 
+					target.tagName === 'IMG' || 
+					target.tagName === 'H1' || 
+					target.tagName === 'H2' || 
+					target.tagName === 'H3' || 
+					target.tagName === 'H4' || 
+					target.tagName === 'H5' || 
+					target.tagName === 'H6' || 
+					target.tagName === 'P' || 
+					target.tagName === 'SPAN' || 
+					target.tagName === 'DIV' && target.classList.contains('interactive') ||
+					target.closest('a') || 
+					target.closest('button') || 
+					target.closest('input') || 
+					target.closest('img') ||
+					target.closest('h1, h2, h3, h4, h5, h6, p, span');
+				
+				// Only trigger if clicking on clean background (not interactive elements)
+				if (!isInteractive) {
+					this.isBlackHoleActive = !this.isBlackHoleActive; // Toggle on/off
+				}
 			});
 
 			// Add key event to deactivate black hole (ESC key)

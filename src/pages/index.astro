@@ -6,12 +6,35 @@ const allPosts = await getCollection("posts");
 ---
 
 <Layout title="Weliton's blog" pageTitle="Hey! It's Weliton" widthSize="max-w-screen-sm">
-  <section>
-    <p class="text-xs mt-2">
-      This is my place to share thoughts, stuff I like to do, photography
-      and technology
-    </p>
+  <section class="mb-12">
+    <div class="flex flex-col lg:flex-row gap-8">
+      <div class="flex-shrink-0 lg:order-1">
+        <img
+          src="/profile.jpg"
+          alt="Weliton"
+          class="w-[200px] h-[200px] object-cover rounded-[20px] shadow-2xl mx-auto lg:mx-0"
+        />
+      </div>
 
+      <div class="lg:order-2">
+        <p class="mt-0 text-sm mt-2 leading-relaxed">
+          Hi there! I'm a software developer, when I'm not doing Frontend stuff, you'll find me watching movies, reading books, listening to music, 
+          doing photography or sim racing.
+        <p class="p-0 text-sm mt-2 leading-relaxed">
+          This is my space to share thoughts, discoveries, my favorite books, movies, music and the things
+          that inspire me.
+        </p>
+        <p class="text-sm mt-2 leading-relaxed">
+          Feel free to explore around, my favorite pages are <a href="/weekly" class="text-blue-500">Weekly</a>
+          and <a href="/movies" class="text-blue-500">Movies</a>.
+          You can also click and hover around to see cool microinteractions I might have added.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Original Content -->
+  <section>
     <div class="mt-8">
       <p class="font-bold text-sm mb-2 text-neutral-600">Thoughts</p>
       <ul class="list-none p-0" id="list">
