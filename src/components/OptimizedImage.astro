@@ -1,0 +1,44 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  sizes?: string;
+  class?: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, alt, sizes = "100vw", class: className = "", width, height } = Astro.props;
+
+// Generate different image sizes for responsive loading
+const generateSrcSet = (originalSrc: string) => {
+  const sizes = [400, 800, 1200, 1600];
+  return sizes
+    .map(size => `${originalSrc}?w=${size} ${size}w`)
+    .join(', ');
+};
+---
+
+<picture>
+  <!-- WebP format for modern browsers -->
+  <source
+    type="image/webp"
+    srcset={generateSrcSet(src.replace(/\.[^.]+$/, '.webp'))}
+    sizes={sizes}
+  />
+  
+  <!-- Fallback to original format -->
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class={`w-full h-full object-cover transition-opacity duration-300 ${className}`}
+    loading="lazy"
+    decoding="async"
+    sizes={sizes}
+    srcset={generateSrcSet(src)}
+    onload="this.style.opacity='1'"
+    style="opacity: 0;"
+  />
+</picture>

@@ -94,7 +94,8 @@ const photosCollection = defineCollection({
   schema: z.object({
     src: z.string(),
     location: z.string(),
-    date: z.date(),
+    date: z.string().transform(str => new Date(str)),
+    description: z.string().optional(),
   }),
 });
 

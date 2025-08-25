@@ -8,18 +8,119 @@ interface Props {
 const { photos } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
   {photos.map((photo) => (
-    <div class="relative aspect-square overflow-hidden">
+    <div class="break-inside-avoid-column mb-4 group cursor-pointer transition-transform duration-300 hover:scale-105 rounded-[10px] overflow-hidden">
+      <!-- Image container with preserved aspect ratio -->
       <img
         src={photo.data.src}
         alt={photo.data.location}
-        class="object-cover w-full h-full"
+        class="w-full h-auto object-cover transition-opacity duration-300"
+        loading="lazy"
+        decoding="async"
+        data-photo-src={photo.data.src}
+        data-photo-location={photo.data.location}
+        data-photo-date={photo.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        data-photo-description={photo.data.description || ''}
       />
-      <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
-        <p>{photo.data.location}</p>
-        <p>{photo.data.date.toLocaleDateString()}</p>
+      
+      <!-- Image overlay with location and date -->
+      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p class="text-sm font-semibold">{photo.data.location}</p>
+        <p class="text-xs">{photo.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
       </div>
     </div>
   ))}
 </div>
+
+<!-- Full-size image modal -->
+<div id="photo-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden overflow-hidden">
+  <div class="relative p-4 max-w-full max-h-full">
+    <button id="close-modal" class="absolute top-4 right-4 text-white text-3xl font-bold z-10">×</button>
+    <img id="modal-image" src="" alt="" class="cursor-zoom-in transition-all duration-300" data-zoomed="false">
+    <div id="modal-caption" class="absolute bottom-4 left-4 right-4 text-white text-center bg-black/50 p-2 rounded"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('photo-modal') as HTMLElement;
+    const modalImage = document.getElementById('modal-image') as HTMLImageElement;
+    const modalCaption = document.getElementById('modal-caption') as HTMLElement;
+    const closeModal = document.getElementById('close-modal') as HTMLElement;
+
+    // Add click event listeners to all photos
+    document.querySelectorAll('[data-photo-src]').forEach(photo => {
+      photo.addEventListener('click', () => {
+        const src = photo.getAttribute('data-photo-src');
+        const location = photo.getAttribute('data-photo-location');
+        const date = photo.getAttribute('data-photo-date');
+        const description = photo.getAttribute('data-photo-description');
+
+        if (src && modal && modalImage && modalCaption) {
+          modalImage.src = src;
+          modalImage.alt = location || '';
+          modalCaption.innerHTML = `
+            <p class="font-semibold">${location || ''}</p>
+            <p class="text-xs">${date || ''}</p>
+            ${description ? `<p class="text-xs mt-1">${description}</p>` : ''}
+          `;
+          
+          // Reset zoom state and set initial viewport height fit
+          // Account for navigation bar height (approximately 80px) and padding (32px)
+          modalImage.dataset.zoomed = 'false';
+          modalImage.classList.remove('max-w-none', 'max-h-none', 'cursor-zoom-out');
+          modalImage.classList.add('w-auto', 'max-w-full', 'max-h-[calc(100vh-112px)]', 'object-contain', 'cursor-zoom-in');
+          
+          modal.classList.remove('hidden');
+          modal.style.overflow = 'hidden'; // Hide modal scrollbar initially
+          document.body.style.overflow = 'hidden'; // Prevent scrolling on body
+        }
+      });
+    });
+
+    // Close modal when clicking close button
+    closeModal?.addEventListener('click', () => {
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    });
+
+    // Close modal when clicking outside the image
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    });
+
+    // Toggle zoom when clicking on the image
+    modalImage?.addEventListener('click', () => {
+      if (!modal || !modalImage) return;
+      
+      const isZoomed = modalImage.dataset.zoomed === 'true';
+      if (isZoomed) {
+        // Zoom out (fit to viewport height)
+        modalImage.dataset.zoomed = 'false';
+        modalImage.classList.remove('max-w-none', 'max-h-none', 'cursor-zoom-out');
+        modalImage.classList.add('w-auto', 'max-w-full', 'max-h-[calc(100vh-112px)]', 'object-contain', 'cursor-zoom-in');
+        modal.style.overflow = 'hidden'; // Hide modal scrollbar when zoomed out
+      } else {
+        // Zoom in (show full size, allow overflow)
+        modalImage.dataset.zoomed = 'true';
+        modalImage.classList.remove('w-auto', 'max-w-full', 'max-h-[calc(100vh-112px)]', 'object-contain', 'cursor-zoom-in');
+        modalImage.classList.add('max-w-none', 'max-h-none', 'cursor-zoom-out'); // Allow image to be its natural size
+        modal.style.overflow = 'auto'; // Allow modal scrolling when zoomed in
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    });
+  });
+</script>
