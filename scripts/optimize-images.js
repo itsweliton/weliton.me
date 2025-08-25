@@ -11,9 +11,9 @@
  * Usage: node scripts/optimize-images.js
  */
 
-const fs = require('fs');
-const path = require('path');
-const sharp = require('sharp');
+import fs from 'fs';
+import path from 'path';
+import sharp from 'sharp';
 
 // Configuration
 const config = {
@@ -80,8 +80,5 @@ async function processImages() {
 }
 
 // Run the script
-if (require.main === module) {
-  processImages();
-}
+processImages();
 
-module.exports = { processImages, config };

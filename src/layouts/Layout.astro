@@ -24,7 +24,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 
 	</head>
 	<body class="dark-mode bg-gray-900 text-gray-100 font-sans">
-		<!-- Interactive Background Canvas -->
+		<!-- Interactive Background Canvas - Always visible, but effects vary by page -->
 		<canvas id="background-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 		
 		<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gray-900/70 overflow-auto">
@@ -106,10 +106,12 @@ const { title, pageTitle, widthSize } = Astro.props;
 		}
 	});
 
-	// Interactive Background System
+	// Interactive Background System - Always show dots, but effects vary by page
 	class InteractiveBackground {
 		constructor() {
 			this.canvas = document.getElementById('background-canvas');
+			if (!this.canvas) return; // Exit if no canvas
+			
 			this.ctx = this.canvas.getContext('2d');
 			this.dots = [];
 			this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; // Initialize to center
@@ -117,6 +119,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 			this.isMouseActive = false; // Track if mouse has been active
 			this.isBlackHoleActive = false; // Track if black hole is active
 			this.glowOpacity = 0; // Track glow opacity for fade effect
+			this.showEffects = false; // Will be set based on page type
 			
 			this.init();
 		}
@@ -181,105 +184,120 @@ const { title, pageTitle, widthSize } = Astro.props;
 				this.isMouseActive = false;
 			});
 
-			// Add click event to toggle black hole on/off
-			document.addEventListener('click', (e) => {
-				// Only trigger animation if clicking on clean background
-				// Check if the clicked element is an interactive element
-				const target = e.target;
-				const isInteractive = target.tagName === 'A' || 
-					target.tagName === 'BUTTON' || 
-					target.tagName === 'INPUT' || 
-					target.tagName === 'IMG' || 
-					target.tagName === 'H1' || 
-					target.tagName === 'H2' || 
-					target.tagName === 'H3' || 
-					target.tagName === 'H4' || 
-					target.tagName === 'H5' || 
-					target.tagName === 'H6' || 
-					target.tagName === 'P' || 
-					target.tagName === 'SPAN' || 
-					target.tagName === 'DIV' && target.classList.contains('interactive') ||
-					target.closest('a') || 
-					target.closest('button') || 
-					target.closest('input') || 
-					target.closest('img') ||
-					target.closest('h1, h2, h3, h4, h5, h6, p, span');
-				
-				// Only trigger if clicking on clean background (not interactive elements)
-				if (!isInteractive) {
-					this.isBlackHoleActive = !this.isBlackHoleActive; // Toggle on/off
-				}
-			});
+			// Only add click events if effects are enabled
+			if (this.showEffects) {
+				// Add click event to toggle black hole on/off
+				document.addEventListener('click', (e) => {
+					// Only trigger animation if clicking on clean background
+					// Check if the clicked element is an interactive element
+					const target = e.target;
+					const isInteractive = target.tagName === 'A' || 
+						target.tagName === 'BUTTON' || 
+						target.tagName === 'INPUT' || 
+						target.tagName === 'IMG' || 
+						target.tagName === 'H1' || 
+						target.tagName === 'H2' || 
+						target.tagName === 'H3' || 
+						target.tagName === 'H4' || 
+						target.tagName === 'H5' || 
+						target.tagName === 'H6' || 
+						target.tagName === 'P' || 
+						target.tagName === 'SPAN' || 
+						target.tagName === 'DIV' && target.classList.contains('interactive') ||
+						target.closest('a') || 
+						target.closest('button') || 
+						target.closest('input') || 
+						target.closest('img') ||
+						target.closest('h1, h2, h3, h4, h5, h6, p, span');
+					
+					// Only trigger if clicking on clean background (not interactive elements)
+					if (!isInteractive) {
+						this.isBlackHoleActive = !this.isBlackHoleActive; // Toggle on/off
+					}
+				});
 
-			// Add key event to deactivate black hole (ESC key)
-			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape') {
-					this.isBlackHoleActive = false;
-				}
-			});
+				// Add key event to deactivate black hole (ESC key)
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape') {
+						this.isBlackHoleActive = false;
+					}
+				});
+			}
 		}
 
 		updateDots() {
-			const gravityStrength = 30; // Back to 1.5 for proper orbital attraction
-			const maxDistance = 300; // Extended area of effect
-			const damping = 0.40; // Back to 0.98 for slower movement
-			const springStrength = 0.08; // Reduced spring strength from 0.15 to 0.08 (gentler return)
-			const blackHoleRadius = 12.5; // Visual black hole size
-			const orbitalRadius = 30; // Area where dots actually orbit
+			// Only apply black hole effects if enabled
+			if (this.showEffects) {
+				const gravityStrength = 30; // Back to 1.5 for proper orbital attraction
+				const maxDistance = 300; // Extended area of effect
+				const damping = 0.40; // Back to 0.98 for slower movement
+				const springStrength = 0.08; // Reduced spring strength from 0.15 to 0.08 (gentler return)
+				const blackHoleRadius = 12.5; // Visual black hole size
+				const orbitalRadius = 30; // Area where dots actually orbit
 
-			// Fade glow opacity smoothly
-			if (this.isBlackHoleActive) {
-				this.glowOpacity = Math.min(1, this.glowOpacity + 0.05); // Fade in
-			} else {
-				this.glowOpacity = Math.max(0, this.glowOpacity - 0.05); // Fade out
-			}
-
-			this.dots.forEach(dot => {
-				// Only apply black hole effect if black hole is active AND mouse has been active AND glow is visible
-				if (this.isBlackHoleActive && this.isMouseActive && this.glowOpacity > 0.1) {
-					// Vector from dot to mouse (black hole center)
-					const dx = this.mouse.x - dot.x;
-					const dy = this.mouse.y - dot.y;
-					const distance = Math.sqrt(dx * dx + dy * dy);
-
-					// Apply gravitational attraction to ALL dots within radius
-					if (distance < maxDistance) {
-						// Calculate distance from orbital area edge (not black hole center)
-						const distanceFromOrbit = Math.max(0, distance - orbitalRadius);
-						
-						// Stronger force for dots closer to the orbital area
-						const force = gravityStrength / (distanceFromOrbit + 1); // +1 to avoid division by zero
-						
-						// Calculate perpendicular force for orbital motion
-						// Instead of pulling directly toward center, create tangential velocity
-						const angle = Math.atan2(dy, dx);
-						const perpendicularAngle = angle + Math.PI / 2; // 90 degrees perpendicular
-						
-						// Apply force perpendicular to the radial direction (creates orbit)
-						dot.vx += Math.cos(perpendicularAngle) * force;
-						dot.vy += Math.sin(perpendicularAngle) * force;
-						
-						// Add slight radial attraction to keep particles in orbit
-						const radialForce = force * 0.3; // Weaker radial component
-						dot.vx += (dx / distance) * radialForce;
-						dot.vy += (dy / distance) * radialForce;
-					}
+				// Fade glow opacity smoothly
+				if (this.isBlackHoleActive) {
+					this.glowOpacity = Math.min(1, this.glowOpacity + 0.05); // Fade in
+				} else {
+					this.glowOpacity = Math.max(0, this.glowOpacity - 0.05); // Fade out
 				}
 
-				// Spring force to return to grid position
-				const springDx = dot.originalX - dot.x;
-				const springDy = dot.originalY - dot.y;
-				dot.vx += springDx * springStrength;
-				dot.vy += springDy * springStrength;
+				this.dots.forEach(dot => {
+					// Only apply black hole effect if black hole is active AND mouse has been active AND glow is visible
+					if (this.isBlackHoleActive && this.isMouseActive && this.glowOpacity > 0.1) {
+						// Vector from dot to mouse (black hole center)
+						const dx = this.mouse.x - dot.x;
+						const dy = this.mouse.y - dot.y;
+						const distance = Math.sqrt(dx * dx + dy * dy);
 
-				// Apply damping
-				dot.vx *= damping;
-				dot.vy *= damping;
+						// Apply gravitational attraction to ALL dots within radius
+						if (distance < maxDistance) {
+							// Calculate distance from orbital area edge (not black hole center)
+							const distanceFromOrbit = Math.max(0, distance - orbitalRadius);
+							
+							// Stronger force for dots closer to the orbital area
+							const force = gravityStrength / (distanceFromOrbit + 1); // +1 to avoid division by zero
+							
+							// Calculate perpendicular force for orbital motion
+							// Instead of pulling directly toward center, create tangential velocity
+							const angle = Math.atan2(dy, dx);
+							const perpendicularAngle = angle + Math.PI / 2; // 90 degrees perpendicular
+							
+							// Apply force perpendicular to the radial direction (creates orbit)
+							dot.vx += Math.cos(perpendicularAngle) * force;
+							dot.vy += Math.sin(perpendicularAngle) * force;
+							
+							// Add slight radial attraction to keep particles in orbit
+							const radialForce = force * 0.3; // Weaker radial component
+							dot.vx += (dx / distance) * radialForce;
+							dot.vy += (dy / distance) * radialForce;
+						}
+					}
 
-				// Update position
-				dot.x += dot.vx;
-				dot.y += dot.vy;
-			});
+					// Spring force to return to grid position
+					const springDx = dot.originalX - dot.x;
+					const springDy = dot.originalY - dot.y;
+					dot.vx += springDx * springStrength;
+					dot.vy += springDy * springStrength;
+
+					// Apply damping
+					dot.vx *= damping;
+					dot.vy *= damping;
+
+					// Update position
+					dot.x += dot.vx;
+					dot.y += dot.vy;
+				});
+			} else {
+				// On other pages, just keep dots in static grid
+				this.dots.forEach(dot => {
+					// Reset to original position
+					dot.x = dot.originalX;
+					dot.y = dot.originalY;
+					dot.vx = 0;
+					dot.vy = 0;
+				});
+			}
 		}
 
 		drawDots() {
@@ -287,7 +305,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 			
 			// Draw dots with fade effect based on black hole state
 			this.dots.forEach(dot => {
-				if (this.isBlackHoleActive && this.glowOpacity > 0) {
+				if (this.showEffects && this.isBlackHoleActive && this.glowOpacity > 0) {
 					// Active state: bright white core with blue glow (faded in)
 					// Outer blue glow
 					this.ctx.fillStyle = '#3B82F6'; // blue-500
@@ -320,7 +338,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 			});
 
 			// Draw black hole visualization only when active and faded in
-			if (this.isBlackHoleActive && this.isMouseActive && this.glowOpacity > 0) {
+			if (this.showEffects && this.isBlackHoleActive && this.isMouseActive && this.glowOpacity > 0) {
 				// Create realistic event horizon glow effect based on actual black hole images
 				
 				// Outer accretion disk glow (orange-red, like real black holes)
@@ -356,7 +374,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 					this.mouse.x, this.mouse.y, 12.5,
 					this.mouse.x, this.mouse.y, 18
 				);
-				gradient3.addColorStop(0, `rgba(255, 69, 0, ${0.4 * this.glowOpacity})`); // Bright orange
+				gradient3.addColorStop(0, `rgba(255, 150, 10, ${0.4 * this.glowOpacity})`); // Bright orange
 				gradient3.addColorStop(0.8, `rgba(255, 140, 0, ${0.2 * this.glowOpacity})`); // Medium orange
 				gradient3.addColorStop(1, 'rgba(255, 69, 0, 0)'); // Transparent
 				
@@ -389,6 +407,13 @@ const { title, pageTitle, widthSize } = Astro.props;
 
 	// Initialize the interactive background when the page loads
 	document.addEventListener('DOMContentLoaded', () => {
-		new InteractiveBackground();
+		const background = new InteractiveBackground();
+		
+		// Check if this page should show effects (index page)
+		// We'll check for a data attribute or specific page content
+		const isIndexPage = document.querySelector('main h1')?.textContent?.includes('Hey! It\'s Weliton');
+		if (isIndexPage) {
+			background.showEffects = true;
+		}
 	});
 </script>
