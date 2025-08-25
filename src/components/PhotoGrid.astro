@@ -41,7 +41,7 @@ const { photos } = Astro.props;
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initPhotoModal() {
     const modal = document.getElementById('photo-modal') as HTMLElement;
     const modalImage = document.getElementById('modal-image') as HTMLImageElement;
     const modalCaption = document.getElementById('modal-caption') as HTMLElement;
@@ -120,5 +120,13 @@ const { photos } = Astro.props;
         document.body.style.overflow = ''; // Restore scrolling
       }
     });
-  });
+  }
+
+  // Initialize on DOM content loaded
+  document.addEventListener('DOMContentLoaded', initPhotoModal);
+
+  // Also initialize when navigating with view transitions
+  if ('startViewTransition' in document) {
+    document.addEventListener('astro:page-load', initPhotoModal);
+  }
 </script>
