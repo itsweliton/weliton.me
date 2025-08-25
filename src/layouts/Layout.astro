@@ -17,17 +17,23 @@ const { title, pageTitle, widthSize } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-				<!-- Include Google Fonts -->
+		<!-- Custom CSS - Load before Tailwind to ensure proper precedence -->
+		<link rel="stylesheet" href="/assets/custom.css">
+		<!-- Include Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+		<!-- Preload custom fonts for better performance -->
+		<!-- <link rel="preload" href="/assets/fonts/AppleGaramondWebfonts/AppleGaramond.woff2" as="font" type="font/woff2" crossorigin> -->
+		<link rel="preload" href="/assets/fonts/AppleGaramondWebfonts/AppleGaramond-Light.woff2" as="font" type="font/woff2" crossorigin>
+		<!-- <link rel="preload" href="/assets/fonts/AppleGaramondWebfonts/AppleGaramond-Bold.woff2" as="font" type="font/woff2" crossorigin> -->
 
 	</head>
-	<body class="dark-mode bg-gray-900 text-gray-100 font-sans">
+	<body class="dark-mode bg-oklch-16-8 text-gray-100 font-sans">
 		<!-- Interactive Background Canvas - Always visible, but effects vary by page -->
 		<canvas id="background-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
-		<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gray-900/70 overflow-auto">
+		<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-oklch-16-8/70 overflow-auto">
 			<nav class="mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="py-4">
 					<button id="menu-toggle" class="md:hidden text-gray-100 mb-4">
@@ -38,19 +44,19 @@ const { title, pageTitle, widthSize } = Astro.props;
 					<div id="menu" class="hidden md:block">
 						<div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 md:justify-between">
 							<ul class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4">
-								<li><a href="/" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Home</a></li>
-								<li><a href="/work" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Work</a></li>
-								<li><a href="/weekly" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Weekly</a></li>
-								<li><a href="/books" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Books</a></li>
-								<li><a href="/movies" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Movies</a></li>
-								<li><a href="/songs" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Songs</a></li>
-								<li><a href="/photos" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Photos</a></li>
+								<li><a href="/" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Home</a></li>
+								<li><a href="/work" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Work</a></li>
+								<li><a href="/weekly" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Weekly</a></li>
+								<li><a href="/books" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Books</a></li>
+								<li><a href="/movies" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Movies</a></li>
+								<li><a href="/songs" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Songs</a></li>
+								<li><a href="/photos" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Photos</a></li>
 							</ul>
 							<ul class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4">
-								<li><a href="https://github.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">GitHub</a></li>
-								<li><a href="https://www.instagram.com/welframes/" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Instagram</a></li>
-								<li><a href="https://www.linkedin.com/in/itsweliton/" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">LinkedIn</a></li>
-								<li><a href="mailto:welitonderesende@gmail.com" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-gray-400 transition ease-in-out">Email</a></li>
+								<li><a href="https://github.com/itsweliton" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">GitHub</a></li>
+								<li><a href="https://www.instagram.com/welframes/" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Instagram</a></li>
+								<li><a href="https://www.linkedin.com/in/itsweliton/" target="_blank" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">LinkedIn</a></li>
+								<li><a href="mailto:welitonderesende@gmail.com" class="hover:bg-gray-800 rounded px-2 py-1 text-sm text-nav-gray transition ease-in-out">Email</a></li>
 							</ul>
 						</div>
 					</div>
@@ -58,7 +64,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 			</nav>
 		</header>
 		<main class={`${widthSize} m-auto mt-32 relative z-10`}>
-			<h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-500 w-fit mb-4">
+			<h1 class="text-5xl text-white w-fit mb-4 font-apple-garamond-light">
 				{pageTitle}
 			</h1>
 			<slot />
@@ -69,26 +75,6 @@ const { title, pageTitle, widthSize } = Astro.props;
     </footer>
 	</body>
 </html>
-
-<style>
-	html body {
-		margin: 0 auto;
-    padding: 1rem;
-    color: rgb(238, 238, 238);
-    font-size: 20px;
-    line-height: 1.6;
-		height: 100%;
-		position: relative;
-		min-height: 100vh;
-	}
-	header {
-		width: 100%;
-	}
-	
-	#background-canvas {
-		opacity: 0.3;
-	}
-</style>
 
 <script is:inline>
 	// Menu functionality
@@ -105,6 +91,21 @@ const { title, pageTitle, widthSize } = Astro.props;
 			menu.classList.add('hidden');
 		}
 	});
+
+	// Enable View Transitions API for slick page transitions
+	if (document.startViewTransition) {
+		// Intercept all navigation clicks
+		document.addEventListener('click', (e) => {
+			const link = e.target.closest('a');
+			if (link && link.href && link.href.startsWith(window.location.origin) && !link.target && !e.ctrlKey && !e.metaKey) {
+				e.preventDefault();
+				
+				document.startViewTransition(() => {
+					window.location.href = link.href;
+				});
+			}
+		});
+	}
 
 	// Interactive Background System - Always show dots, but effects vary by page
 	class InteractiveBackground {

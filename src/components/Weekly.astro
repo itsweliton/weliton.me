@@ -20,10 +20,10 @@ const weekNumber = getWeekNumber(date);
 
 <li class="mb-2 flex justify-between items-center text-sm border-b-2 border-gray-800 pb-2 transition duration-300 ease-in-out hover:text-neutral-400">
   <div>
-    <a href={url} target="_blank" rel="noopener noreferrer" class="hover:text-green-400 transition-colors">
-      <h2 class="text-md font-semibold text-slate-200">{title}</h2>
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      <h2 class="text-md font-semibold text-white">{title}</h2>
     </a>
-    {description && <p class="text-sm text-gray-700 font-light">{description}</p>}
+    {description && <p class="text-sm text-gray-400 font-light">{description}</p>}
   </div>
   <span class="font-mono">
     Week {weekNumber}

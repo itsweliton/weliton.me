@@ -1,0 +1,155 @@
+
+
+/* Slick Page Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.5s;
+}
+
+::view-transition-old(root) {
+	animation-name: exit;
+}
+
+::view-transition-new(root) {
+	animation-name: enter;
+}
+
+@keyframes exit {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes enter {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+/* Custom Apple Garamond Font Declarations - Simplified */
+@font-face {
+	font-family: 'AppleGaramondLight';
+	src: url('/assets/fonts/AppleGaramondWebfonts/AppleGaramond-Light.woff2') format('woff2');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'AppleGaramond';
+	src: url('/assets/fonts/AppleGaramondWebfonts/AppleGaramond.woff2') format('woff2');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'AppleGaramondBold';
+	src: url('/assets/fonts/AppleGaramondWebfonts/AppleGaramond-Bold.woff2') format('woff2');
+	font-display: swap;
+}
+
+/* Simple font utility classes */
+.font-apple-garamond-light {
+	font-family: 'AppleGaramondLight', serif;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.font-apple-garamond {
+	font-family: 'AppleGaramond', serif;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.font-apple-garamond-bold {
+	font-family: 'AppleGaramondBold', serif;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Apply font rendering to all text elements */
+body, h1, h2, h3, h4, h5, h6, p, span, div, a, li, button {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Regular paragraph text styling */
+p {
+	color: color(display-p3 0.933 0.933 0.933);
+	font-size: 0.875rem; /* text-sm equivalent */
+	line-height: 1.625; /* leading-relaxed equivalent */
+}
+
+/* Post content styling */
+.post-content p,
+.post-content li,
+.post-content div,
+.post-content span {
+	color: color(display-p3 0.933 0.933 0.933);
+	font-size: 0.875rem;
+	line-height: 1.625;
+}
+
+/* Markdown content styling */
+.prose p,
+.prose li,
+.prose div,
+.prose span {
+	color: color(display-p3 0.933 0.933 0.933);
+	font-size: 0.875rem;
+	line-height: 1.625;
+}
+
+/* Utility class for description text */
+.text-description {
+	color: color(display-p3 0.933 0.933 0.933);
+	font-size: 0.875rem;
+	line-height: 1.625;
+}
+
+/* Custom background color */
+.bg-oklch-16-8 {
+	background-color: oklch(16.8% 0 0);
+}
+
+/* Default gradient for all links */
+a {
+	background: linear-gradient(to right, #86efac, #3b82f6);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-decoration: none;
+	transition: opacity 0.2s ease-in-out;
+}
+
+a:hover {
+	opacity: 0.8;
+}
+
+/* Override for navigation links only */
+header a,
+nav a {
+	background: none;
+	-webkit-background-clip: initial;
+	background-clip: initial;
+	-webkit-text-fill-color: initial;
+	color: inherit;
+}
+
+/* Essential layout styles */
+html body {
+	margin: 0 auto;
+	padding: 1rem;
+	color: rgb(238, 238, 238);
+	font-size: 20px;
+	line-height: 1.6;
+	height: 100%;
+	position: relative;
+	min-height: 100vh;
+}
+
+header {
+	width: 100%;
+}
+
+#background-canvas {
+	opacity: 0.3;
+}
