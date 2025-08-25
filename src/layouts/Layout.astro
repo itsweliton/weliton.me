@@ -26,7 +26,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 	<body class="dark-mode bg-gray-900 text-gray-100 font-sans">
 		<!-- Interactive Background Canvas - Always visible, but effects vary by page -->
 		<canvas id="background-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
-		
+
 		<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gray-900/70 overflow-auto">
 			<nav class="mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="py-4">
@@ -63,7 +63,7 @@ const { title, pageTitle, widthSize } = Astro.props;
 			</h1>
 			<slot />
 		</main>
-		<footer class="text-center py-4 text-xs absolute bottom-0 w-full mt-10 relative z-10">
+		<footer class="text-center py-4 text-xs absolute bottom-0 w-full mt-10 relative z-2">
       <p>© 2014-2025 Weliton Soranzo. All Rights Reserved.</p>
 			weliton.me . <span class="text-xs">v.2025.08</span>
     </footer>

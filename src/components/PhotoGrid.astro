@@ -11,7 +11,6 @@ const { photos } = Astro.props;
 <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
   {photos.map((photo) => (
     <div class="break-inside-avoid-column mb-4 group cursor-pointer transition-transform duration-300 hover:scale-105 rounded-[10px] overflow-hidden">
-      <!-- Image container with preserved aspect ratio -->
       <img
         src={photo.data.src}
         alt={photo.data.location}
@@ -23,8 +22,7 @@ const { photos } = Astro.props;
         data-photo-date={photo.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         data-photo-description={photo.data.description || ''}
       />
-      
-      <!-- Image overlay with location and date -->
+
       <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <p class="text-sm font-semibold">{photo.data.location}</p>
         <p class="text-xs">{photo.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -65,13 +63,13 @@ const { photos } = Astro.props;
             <p class="text-xs">${date || ''}</p>
             ${description ? `<p class="text-xs mt-1">${description}</p>` : ''}
           `;
-          
+
           // Reset zoom state and set initial viewport height fit
           // Account for navigation bar height (approximately 80px) and padding (32px)
           modalImage.dataset.zoomed = 'false';
           modalImage.classList.remove('max-w-none', 'max-h-none', 'cursor-zoom-out');
           modalImage.classList.add('w-auto', 'max-w-full', 'max-h-[calc(100vh-112px)]', 'object-contain', 'cursor-zoom-in');
-          
+
           modal.classList.remove('hidden');
           modal.style.overflow = 'hidden'; // Hide modal scrollbar initially
           document.body.style.overflow = 'hidden'; // Prevent scrolling on body
